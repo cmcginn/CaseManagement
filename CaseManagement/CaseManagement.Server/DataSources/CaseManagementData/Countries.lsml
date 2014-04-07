@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceApplication
+  Name="LightSwitchServiceApplication" xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <ServiceApplication.Attributes>
+    <Partial />
+  </ServiceApplication.Attributes>
+  <EntityType
+    Name="Country">
+    <EntityType.Methods>
+      <EntityMethod
+        Name="Delete">
+        <EntityMethod.Attributes>
+          <Generated />
+        </EntityMethod.Attributes>
+      </EntityMethod>
+    </EntityType.Methods>
+    <EntityType.Properties>
+      <KeyProperty
+        Name="Id"
+        IsReadOnly="True"
+        PropertyType=":Int32">
+        <KeyProperty.Attributes>
+          <Hidden />
+          <Required />
+          <NotSearchable />
+        </KeyProperty.Attributes>
+      </KeyProperty>
+      <EntityProperty
+        Name="Name"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="100" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="TwoLetterIsoCode"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="2" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="ThreeLetterIsoCode"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="3" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="NumericIsoCode"
+        PropertyType=":Int32">
+        <EntityProperty.Attributes>
+          <Required />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Published"
+        PropertyType=":Boolean">
+        <EntityProperty.Attributes>
+          <Required />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="DisplayOrder"
+        PropertyType=":Int32">
+        <EntityProperty.Attributes>
+          <Required />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <NavigationProperty
+        Name="Addresses"
+        Association="FK_Address_Country"
+        FromEnd="Country"
+        ToEnd="Address" />
+      <NavigationProperty
+        Name="StateProvinces"
+        Association="StateProvince_Country"
+        FromEnd="Country"
+        ToEnd="StateProvince" />
+    </EntityType.Properties>
+  </EntityType>
+  <Association
+    Name="FK_Address_Country">
+    <AssociationEnd
+      Name="Country"
+      Multiplicity="One"
+      EntityType="Country">
+      <AssociationEnd.Attributes>
+        <DeleteRule />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="Address"
+      Multiplicity="Many"
+      EntityType="Address" />
+  </Association>
+  <Association
+    Name="StateProvince_Country">
+    <AssociationEnd
+      Name="Country"
+      Multiplicity="One"
+      EntityType="Country">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Cascade" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="StateProvince"
+      Multiplicity="Many"
+      EntityType="StateProvince" />
+  </Association>
+  <EntityContainer
+    Name="CaseManagementData">
+    <EntityContainer.Attributes>
+      <Partial />
+    </EntityContainer.Attributes>
+    <EntitySet
+      Name="Countries"
+      CanDelete="True"
+      CanInsert="True"
+      CanUpdate="True"
+      EntityType="Country" />
+    <AssociationSet
+      Name="FK_Address_Country"
+      Association="FK_Address_Country">
+      <AssociationSetEnd
+        Name="Country"
+        EntitySet="Countries" />
+      <AssociationSetEnd
+        Name="Address"
+        EntitySet="Addresses" />
+    </AssociationSet>
+    <AssociationSet
+      Name="StateProvince_Country"
+      Association="StateProvince_Country">
+      <AssociationSetEnd
+        Name="Country"
+        EntitySet="Countries" />
+      <AssociationSetEnd
+        Name="StateProvince"
+        EntitySet="StateProvinces" />
+    </AssociationSet>
+    <QueryOperation
+      Name="Countries_Single"
+      ReturnType="Country">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s)." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="Id" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="Id" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Countries" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="Id"
+        ParameterType=":Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'Id' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <QueryOperation
+      Name="Countries_SingleOrDefault"
+      ReturnType="Country">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s) or null if no such entity exists." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="Id" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="Id" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Countries" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="Id"
+        ParameterType=":Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'Id' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+  </EntityContainer>
+  <DataService
+    Name="CaseManagementDataDataService">
+    <DataService.Attributes>
+      <Partial />
+    </DataService.Attributes>
+    <EntitySetMapping
+      EntitySet="Countries">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="Country" />
+        <SsdlProperty
+          Name="Id"
+          Nullable="False"
+          StoreGeneratedPattern="Identity"
+          Type="int"
+          Property="Country/Properties[Id]" />
+        <SsdlProperty
+          MaxLength="100"
+          Name="Name"
+          Nullable="False"
+          Type="nvarchar"
+          Property="Country/Properties[Name]" />
+        <SsdlProperty
+          MaxLength="2"
+          Name="TwoLetterIsoCode"
+          Nullable="True"
+          Type="nvarchar"
+          Property="Country/Properties[TwoLetterIsoCode]" />
+        <SsdlProperty
+          MaxLength="3"
+          Name="ThreeLetterIsoCode"
+          Nullable="True"
+          Type="nvarchar"
+          Property="Country/Properties[ThreeLetterIsoCode]" />
+        <SsdlProperty
+          Name="NumericIsoCode"
+          Nullable="False"
+          Type="int"
+          Property="Country/Properties[NumericIsoCode]" />
+        <SsdlProperty
+          Name="Published"
+          Nullable="False"
+          Type="bit"
+          Property="Country/Properties[Published]" />
+        <SsdlProperty
+          Name="DisplayOrder"
+          Nullable="False"
+          Type="int"
+          Property="Country/Properties[DisplayOrder]" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Address_Country">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Address_Country" />
+        <SsdlAssociationSetEnd
+          End="CaseManagementData/Members[FK_Address_Country]/Members[Country]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="CaseManagementData/Members[FK_Address_Country]/Members[Address]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CountryId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="StateProvince_Country">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="StateProvince_Country" />
+        <SsdlAssociationSetEnd
+          End="CaseManagementData/Members[StateProvince_Country]/Members[Country]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="CaseManagementData/Members[StateProvince_Country]/Members[StateProvince]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CountryId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+  </DataService>
+</ServiceApplication>

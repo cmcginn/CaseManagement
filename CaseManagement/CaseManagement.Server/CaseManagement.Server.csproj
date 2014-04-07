@@ -191,6 +191,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataSources\CaseManagementData\_CaseManagementDataService.lsml.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -200,10 +201,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Web.config" />
+    <LightSwitchModel Include="Properties\DataSources\CaseManagementData.lsml" />
+    <LightSwitchModel Include="DataSources\CaseManagementData\Addresses.lsml" />
     <LightSwitchModel Include="DataSources\CaseManagementData\Cases.lsml" />
     <LightSwitchModel Include="DataSources\CaseManagementData\CaseTypes.lsml" />
+    <LightSwitchModel Include="DataSources\CaseManagementData\Countries.lsml" />
+    <LightSwitchModel Include="DataSources\CaseManagementData\People.lsml" />
+    <LightSwitchModel Include="DataSources\CaseManagementData\StateProvinces.lsml" />
     <LightSwitchModel Include="DataSources\CaseManagementData\StatusTypes.lsml" />
-    <LightSwitchModel Include="Properties\DataSources\CaseManagementData.lsml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

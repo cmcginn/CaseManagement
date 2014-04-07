@@ -5,7 +5,7 @@
     <Partial />
   </ServiceApplication.Attributes>
   <EntityType
-    Name="c_Case">
+    Name="StateProvince">
     <EntityType.Methods>
       <EntityMethod
         Name="Delete">
@@ -17,70 +17,98 @@
     <EntityType.Properties>
       <KeyProperty
         Name="Id"
-        PropertyType=":Guid">
+        IsReadOnly="True"
+        PropertyType=":Int32">
         <KeyProperty.Attributes>
+          <Hidden />
           <Required />
           <NotSearchable />
         </KeyProperty.Attributes>
       </KeyProperty>
       <EntityProperty
-        Name="CreatedOnUtc"
-        PropertyType=":DateTime">
+        Name="Name"
+        PropertyType=":String">
         <EntityProperty.Attributes>
           <Required />
-          <DateTimeConstraint
-            Precision="3"
-            PreserveSeconds="True" />
+          <MaxLength
+            Value="100" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Abbreviation"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="100" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Published"
+        PropertyType=":Boolean">
+        <EntityProperty.Attributes>
+          <Required />
           <NotSearchable />
         </EntityProperty.Attributes>
       </EntityProperty>
       <EntityProperty
-        Name="LastUpdatedOnUtc"
-        PropertyType=":DateTime">
+        Name="DisplayOrder"
+        PropertyType=":Int32">
         <EntityProperty.Attributes>
           <Required />
-          <DateTimeConstraint
-            Precision="3"
-            PreserveSeconds="True" />
           <NotSearchable />
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
-        Name="Address"
-        Association="FK_Case_Address"
-        FromEnd="c_Case"
+        Name="Addresses"
+        Association="FK_Address_StateProvince"
+        FromEnd="StateProvince"
         ToEnd="Address" />
       <NavigationProperty
-        Name="CaseType"
-        Association="FK_Case_CaseType"
-        FromEnd="c_Case"
-        ToEnd="CaseType" />
-      <NavigationProperty
-        Name="Person"
-        Association="FK_Case_Person"
-        FromEnd="c_Case"
-        ToEnd="Person" />
-      <NavigationProperty
-        Name="StatusType"
-        Association="FK_Case_StatusType"
-        FromEnd="c_Case"
-        ToEnd="StatusType" />
+        Name="Country"
+        Association="StateProvince_Country"
+        FromEnd="StateProvince"
+        ToEnd="Country" />
     </EntityType.Properties>
   </EntityType>
+  <Association
+    Name="FK_Address_StateProvince">
+    <AssociationEnd
+      Name="StateProvince"
+      Multiplicity="One"
+      EntityType="StateProvince">
+      <AssociationEnd.Attributes>
+        <DeleteRule />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="Address"
+      Multiplicity="Many"
+      EntityType="Address" />
+  </Association>
   <EntityContainer
     Name="CaseManagementData">
     <EntityContainer.Attributes>
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
-      Name="Cases"
+      Name="StateProvinces"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="c_Case" />
+      EntityType="StateProvince" />
+    <AssociationSet
+      Name="FK_Address_StateProvince"
+      Association="FK_Address_StateProvince">
+      <AssociationSetEnd
+        Name="StateProvince"
+        EntitySet="StateProvinces" />
+      <AssociationSetEnd
+        Name="Address"
+        EntitySet="Addresses" />
+    </AssociationSet>
     <QueryOperation
-      Name="Cases_Single"
-      ReturnType="c_Case">
+      Name="StateProvinces_Single"
+      ReturnType="StateProvince">
       <QueryOperation.Attributes>
         <Generated />
         <Description
@@ -106,12 +134,12 @@
       <QueryOperation.Source>
         <QuerySourceExpressionTree>
           <MemberExpression
-            Member="Cases" />
+            Member="StateProvinces" />
         </QuerySourceExpressionTree>
       </QueryOperation.Source>
       <QueryOperationParameter
         Name="Id"
-        ParameterType=":Guid?">
+        ParameterType=":Int32?">
         <QueryOperationParameter.Attributes>
           <Description
             Value="The value of the 'Id' key property of the entity to retrieve." />
@@ -119,8 +147,8 @@
       </QueryOperationParameter>
     </QueryOperation>
     <QueryOperation
-      Name="Cases_SingleOrDefault"
-      ReturnType="c_Case">
+      Name="StateProvinces_SingleOrDefault"
+      ReturnType="StateProvince">
       <QueryOperation.Attributes>
         <Generated />
         <Description
@@ -146,12 +174,12 @@
       <QueryOperation.Source>
         <QuerySourceExpressionTree>
           <MemberExpression
-            Member="Cases" />
+            Member="StateProvinces" />
         </QuerySourceExpressionTree>
       </QueryOperation.Source>
       <QueryOperationParameter
         Name="Id"
-        ParameterType=":Guid?">
+        ParameterType=":Int32?">
         <QueryOperationParameter.Attributes>
           <Description
             Value="The value of the 'Id' key property of the entity to retrieve." />
@@ -165,47 +193,66 @@
       <Partial />
     </DataService.Attributes>
     <EntitySetMapping
-      EntitySet="Cases">
+      EntitySet="StateProvinces">
       <EntitySetMapping.Attributes>
         <SsdlEntitySet
           Schema="dbo"
-          Table="Case" />
+          Table="StateProvince" />
         <SsdlProperty
           Name="Id"
           Nullable="False"
-          Type="uniqueidentifier"
-          Property="c_Case/Properties[Id]" />
+          StoreGeneratedPattern="Identity"
+          Type="int"
+          Property="StateProvince/Properties[Id]" />
         <SsdlProperty
-          Name="CreatedOnUtc"
+          MaxLength="100"
+          Name="Name"
           Nullable="False"
-          Type="datetime"
-          Property="c_Case/Properties[CreatedOnUtc]" />
+          Type="nvarchar"
+          Property="StateProvince/Properties[Name]" />
         <SsdlProperty
-          Name="LastUpdatedOnUtc"
+          MaxLength="100"
+          Name="Abbreviation"
+          Nullable="True"
+          Type="nvarchar"
+          Property="StateProvince/Properties[Abbreviation]" />
+        <SsdlProperty
+          Name="Published"
           Nullable="False"
-          Type="datetime"
-          Property="c_Case/Properties[LastUpdatedOnUtc]" />
-        <SsdlForeignKeyProperty
-          Name="AddressId"
-          Nullable="False"
-          Type="uniqueidentifier"
-          PropertyName="AddressId" />
-        <SsdlForeignKeyProperty
-          Name="CaseTypeId"
+          Type="bit"
+          Property="StateProvince/Properties[Published]" />
+        <SsdlProperty
+          Name="DisplayOrder"
           Nullable="False"
           Type="int"
-          PropertyName="CaseTypeId" />
+          Property="StateProvince/Properties[DisplayOrder]" />
         <SsdlForeignKeyProperty
-          Name="PersonId"
-          Nullable="False"
-          Type="uniqueidentifier"
-          PropertyName="PersonId" />
-        <SsdlForeignKeyProperty
-          Name="StatusTypeId"
+          Name="CountryId"
           Nullable="False"
           Type="int"
-          PropertyName="StatusTypeId" />
+          PropertyName="CountryId" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Address_StateProvince">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Address_StateProvince" />
+        <SsdlAssociationSetEnd
+          End="CaseManagementData/Members[FK_Address_StateProvince]/Members[StateProvince]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="CaseManagementData/Members[FK_Address_StateProvince]/Members[Address]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="StateProvinceId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
   </DataService>
 </ServiceApplication>

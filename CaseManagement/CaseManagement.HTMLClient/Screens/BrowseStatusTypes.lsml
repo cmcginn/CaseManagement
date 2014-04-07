@@ -5,7 +5,11 @@
     <Partial />
   </Application.Attributes>
   <Screen
-    Name="Home">
+    Name="BrowseStatusTypes">
+    <Screen.Attributes>
+      <SaveChangesTo
+        EntityContainer="CaseManagementData" />
+    </Screen.Attributes>
     <Screen.RootContentItem>
       <ContentItem
         Name="RootContentItem"
@@ -16,46 +20,13 @@
           Kind="Group"
           View="Microsoft.LightSwitch.MobileWeb:TabPages">
           <ContentItem
-            Name="Group"
+            Name="StatusTypeList"
             Kind="Group">
-            <ContentItem
-              Name="ShowCaseSettings"
-              Kind="Command">
-              <ContentItem.Attributes>
-                <DisplayName
-                  Value="Case Settings" />
-              </ContentItem.Attributes>
-              <ContentItem.PropertySources>
-                <ControlPropertySource
-                  Property="Microsoft.LightSwitch.MobileWeb:RootControl/Properties[Tap]">
-                  <ScreenExpressionTree>
-                    <ChainExpression>
-                      <CallExpression
-                        Target="!module/Methods[showCaseSettings]" />
-                    </ChainExpression>
-                  </ScreenExpressionTree>
-                </ControlPropertySource>
-              </ContentItem.PropertySources>
-            </ContentItem>
-            <ContentItem
-              Name="ShowBrowseCases"
-              Kind="Command">
-              <ContentItem.Attributes>
-                <DisplayName
-                  Value="Cases" />
-              </ContentItem.Attributes>
-              <ContentItem.PropertySources>
-                <ControlPropertySource
-                  Property="Microsoft.LightSwitch.MobileWeb:RootControl/Properties[Tap]">
-                  <ScreenExpressionTree>
-                    <ChainExpression>
-                      <CallExpression
-                        Target="!module/Methods[showBrowseCases]" />
-                    </ChainExpression>
-                  </ScreenExpressionTree>
-                </ControlPropertySource>
-              </ContentItem.PropertySources>
-            </ContentItem>
+            <ContentItem.CommandItems>
+              <ContentItem
+                Name="AddStatusType"
+                Kind="Command" />
+            </ContentItem.CommandItems>
           </ContentItem>
           <ContentItem.PropertySources>
             <ControlPropertySource
@@ -103,10 +74,10 @@
   </Screen>
   <Application.Methods>
     <ApplicationMethod
-      Name="showHome">
+      Name="showBrowseStatusTypes">
       <ApplicationMethod.Attributes>
         <ShowScreenMethod
-          TargetScreen="Home" />
+          TargetScreen="BrowseStatusTypes" />
       </ApplicationMethod.Attributes>
     </ApplicationMethod>
   </Application.Methods>

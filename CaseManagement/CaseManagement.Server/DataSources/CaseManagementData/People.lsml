@@ -5,7 +5,7 @@
     <Partial />
   </ServiceApplication.Attributes>
   <EntityType
-    Name="c_Case">
+    Name="Person">
     <EntityType.Methods>
       <EntityMethod
         Name="Delete">
@@ -24,63 +24,80 @@
         </KeyProperty.Attributes>
       </KeyProperty>
       <EntityProperty
-        Name="CreatedOnUtc"
-        PropertyType=":DateTime">
+        Name="FirstName"
+        PropertyType=":String">
         <EntityProperty.Attributes>
           <Required />
-          <DateTimeConstraint
-            Precision="3"
-            PreserveSeconds="True" />
-          <NotSearchable />
+          <MaxLength
+            Value="50" />
         </EntityProperty.Attributes>
       </EntityProperty>
       <EntityProperty
-        Name="LastUpdatedOnUtc"
-        PropertyType=":DateTime">
+        Name="LastName"
+        PropertyType=":String">
         <EntityProperty.Attributes>
           <Required />
-          <DateTimeConstraint
-            Precision="3"
-            PreserveSeconds="True" />
-          <NotSearchable />
+          <MaxLength
+            Value="50" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="MiddleInitial"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength
+            IsFixedLength="True"
+            Value="1" />
+          <AnsiConstraint />
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
-        Name="Address"
-        Association="FK_Case_Address"
-        FromEnd="c_Case"
-        ToEnd="Address" />
-      <NavigationProperty
-        Name="CaseType"
-        Association="FK_Case_CaseType"
-        FromEnd="c_Case"
-        ToEnd="CaseType" />
-      <NavigationProperty
-        Name="Person"
+        Name="Cases"
         Association="FK_Case_Person"
-        FromEnd="c_Case"
-        ToEnd="Person" />
-      <NavigationProperty
-        Name="StatusType"
-        Association="FK_Case_StatusType"
-        FromEnd="c_Case"
-        ToEnd="StatusType" />
+        FromEnd="Person"
+        ToEnd="c_Case" />
     </EntityType.Properties>
   </EntityType>
+  <Association
+    Name="FK_Case_Person">
+    <AssociationEnd
+      Name="Person"
+      Multiplicity="One"
+      EntityType="Person">
+      <AssociationEnd.Attributes>
+        <DeleteRule />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="c_Case"
+      Multiplicity="Many"
+      EntityType="c_Case" />
+  </Association>
   <EntityContainer
     Name="CaseManagementData">
     <EntityContainer.Attributes>
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
-      Name="Cases"
+      Name="People"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="c_Case" />
+      EntityType="Person" />
+    <AssociationSet
+      Name="FK_Case_Person"
+      Association="FK_Case_Person">
+      <AssociationSetEnd
+        Name="Person"
+        EntitySet="People" />
+      <AssociationSetEnd
+        Name="c_Case"
+        EntitySet="Cases" />
+    </AssociationSet>
     <QueryOperation
-      Name="Cases_Single"
-      ReturnType="c_Case">
+      Name="People_Single"
+      ReturnType="Person">
       <QueryOperation.Attributes>
         <Generated />
         <Description
@@ -106,7 +123,7 @@
       <QueryOperation.Source>
         <QuerySourceExpressionTree>
           <MemberExpression
-            Member="Cases" />
+            Member="People" />
         </QuerySourceExpressionTree>
       </QueryOperation.Source>
       <QueryOperationParameter
@@ -119,8 +136,8 @@
       </QueryOperationParameter>
     </QueryOperation>
     <QueryOperation
-      Name="Cases_SingleOrDefault"
-      ReturnType="c_Case">
+      Name="People_SingleOrDefault"
+      ReturnType="Person">
       <QueryOperation.Attributes>
         <Generated />
         <Description
@@ -146,7 +163,7 @@
       <QueryOperation.Source>
         <QuerySourceExpressionTree>
           <MemberExpression
-            Member="Cases" />
+            Member="People" />
         </QuerySourceExpressionTree>
       </QueryOperation.Source>
       <QueryOperationParameter
@@ -165,47 +182,56 @@
       <Partial />
     </DataService.Attributes>
     <EntitySetMapping
-      EntitySet="Cases">
+      EntitySet="People">
       <EntitySetMapping.Attributes>
         <SsdlEntitySet
           Schema="dbo"
-          Table="Case" />
+          Table="Person" />
         <SsdlProperty
           Name="Id"
           Nullable="False"
           Type="uniqueidentifier"
-          Property="c_Case/Properties[Id]" />
+          Property="Person/Properties[Id]" />
         <SsdlProperty
-          Name="CreatedOnUtc"
+          MaxLength="50"
+          Name="FirstName"
           Nullable="False"
-          Type="datetime"
-          Property="c_Case/Properties[CreatedOnUtc]" />
+          Type="nvarchar"
+          Property="Person/Properties[FirstName]" />
         <SsdlProperty
-          Name="LastUpdatedOnUtc"
+          MaxLength="50"
+          Name="LastName"
           Nullable="False"
-          Type="datetime"
-          Property="c_Case/Properties[LastUpdatedOnUtc]" />
-        <SsdlForeignKeyProperty
-          Name="AddressId"
+          Type="nvarchar"
+          Property="Person/Properties[LastName]" />
+        <SsdlProperty
+          MaxLength="1"
+          Name="MiddleInitial"
           Nullable="False"
-          Type="uniqueidentifier"
-          PropertyName="AddressId" />
-        <SsdlForeignKeyProperty
-          Name="CaseTypeId"
-          Nullable="False"
-          Type="int"
-          PropertyName="CaseTypeId" />
-        <SsdlForeignKeyProperty
-          Name="PersonId"
-          Nullable="False"
-          Type="uniqueidentifier"
-          PropertyName="PersonId" />
-        <SsdlForeignKeyProperty
-          Name="StatusTypeId"
-          Nullable="False"
-          Type="int"
-          PropertyName="StatusTypeId" />
+          Type="char"
+          Property="Person/Properties[MiddleInitial]" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Case_Person">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Case_Person" />
+        <SsdlAssociationSetEnd
+          End="CaseManagementData/Members[FK_Case_Person]/Members[Person]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="CaseManagementData/Members[FK_Case_Person]/Members[c_Case]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="PersonId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
   </DataService>
 </ServiceApplication>

@@ -4,6 +4,18 @@
   <Application.Attributes>
     <Partial />
   </Application.Attributes>
+  <EntityContainer>
+    <EntityContainer.Attributes>
+      <Proxy
+        Target="ServiceInterface:CaseManagementData" />
+    </EntityContainer.Attributes>
+  </EntityContainer>
+  <EntityType>
+    <EntityType.Attributes>
+      <Proxy
+        Target="ServiceInterface:Address" />
+    </EntityType.Attributes>
+  </EntityType>
   <EntityType>
     <EntityType.Attributes>
       <Proxy
@@ -19,9 +31,45 @@
   <EntityType>
     <EntityType.Attributes>
       <Proxy
+        Target="ServiceInterface:Country" />
+    </EntityType.Attributes>
+  </EntityType>
+  <EntityType>
+    <EntityType.Attributes>
+      <Proxy
+        Target="ServiceInterface:Person" />
+    </EntityType.Attributes>
+  </EntityType>
+  <EntityType>
+    <EntityType.Attributes>
+      <Proxy
+        Target="ServiceInterface:StateProvince" />
+    </EntityType.Attributes>
+  </EntityType>
+  <EntityType>
+    <EntityType.Attributes>
+      <Proxy
         Target="ServiceInterface:StatusType" />
     </EntityType.Attributes>
   </EntityType>
+  <Association>
+    <Association.Attributes>
+      <Proxy
+        Target="ServiceInterface:FK_Address_Country" />
+    </Association.Attributes>
+  </Association>
+  <Association>
+    <Association.Attributes>
+      <Proxy
+        Target="ServiceInterface:FK_Address_StateProvince" />
+    </Association.Attributes>
+  </Association>
+  <Association>
+    <Association.Attributes>
+      <Proxy
+        Target="ServiceInterface:FK_Case_Address" />
+    </Association.Attributes>
+  </Association>
   <Association>
     <Association.Attributes>
       <Proxy
@@ -31,13 +79,19 @@
   <Association>
     <Association.Attributes>
       <Proxy
+        Target="ServiceInterface:FK_Case_Person" />
+    </Association.Attributes>
+  </Association>
+  <Association>
+    <Association.Attributes>
+      <Proxy
         Target="ServiceInterface:FK_Case_StatusType" />
     </Association.Attributes>
   </Association>
-  <EntityContainer>
-    <EntityContainer.Attributes>
+  <Association>
+    <Association.Attributes>
       <Proxy
-        Target="ServiceInterface:CaseManagementData" />
-    </EntityContainer.Attributes>
-  </EntityContainer>
+        Target="ServiceInterface:StateProvince_Country" />
+    </Association.Attributes>
+  </Association>
 </Application>

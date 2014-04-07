@@ -78,6 +78,18 @@
     <Content Include="Scripts\msls-2.0.0.min.js" />
     <Content Include="Scripts\winjs-1.0.js" />
     <Content Include="Scripts\winjs-1.0.min.js" />
+    <Content Include="UserCode\Address.lsml.js">
+      <DependentUpon>
+      </DependentUpon>
+    </Content>
+    <Content Include="UserCode\c_Case.lsml.js">
+      <DependentUpon>
+      </DependentUpon>
+    </Content>
+    <Content Include="UserCode\Person.lsml.js">
+      <DependentUpon>
+      </DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ServiceMetadataReference Include="..\CaseManagement.Server\CaseManagement.Server.csproj">
@@ -89,8 +101,13 @@
       <ProjectCritical>true</ProjectCritical>
     </LightSwitchModel>
     <LightSwitchModel Include="Properties\Proxies.lsml" />
+    <LightSwitchModel Include="Screens\AddEditCase.lsml" />
     <LightSwitchModel Include="Screens\AddEditCaseType.lsml" />
+    <LightSwitchModel Include="Screens\AddEditc_Case.lsml" />
+    <LightSwitchModel Include="Screens\AddEditStatusType.lsml" />
+    <LightSwitchModel Include="Screens\BrowseCases.lsml" />
     <LightSwitchModel Include="Screens\BrowseCaseTypes.lsml" />
+    <LightSwitchModel Include="Screens\BrowseStatusTypes.lsml" />
     <LightSwitchModel Include="Screens\CaseSettings.lsml" />
     <LightSwitchModel Include="Screens\Home.lsml" />
   </ItemGroup>

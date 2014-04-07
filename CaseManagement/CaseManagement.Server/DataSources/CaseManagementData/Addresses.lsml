@@ -5,7 +5,7 @@
     <Partial />
   </ServiceApplication.Attributes>
   <EntityType
-    Name="c_Case">
+    Name="Address">
     <EntityType.Methods>
       <EntityMethod
         Name="Delete">
@@ -24,63 +24,96 @@
         </KeyProperty.Attributes>
       </KeyProperty>
       <EntityProperty
-        Name="CreatedOnUtc"
-        PropertyType=":DateTime">
+        Name="AddressLine1"
+        PropertyType=":String">
         <EntityProperty.Attributes>
           <Required />
-          <DateTimeConstraint
-            Precision="3"
-            PreserveSeconds="True" />
-          <NotSearchable />
+          <MaxLength
+            Value="255" />
         </EntityProperty.Attributes>
       </EntityProperty>
       <EntityProperty
-        Name="LastUpdatedOnUtc"
-        PropertyType=":DateTime">
+        Name="AddressLine2"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="255" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="City"
+        PropertyType=":String">
         <EntityProperty.Attributes>
           <Required />
-          <DateTimeConstraint
-            Precision="3"
-            PreserveSeconds="True" />
-          <NotSearchable />
+          <MaxLength
+            Value="100" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="PostalCode"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="50" />
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
-        Name="Address"
+        Name="Country"
+        Association="FK_Address_Country"
+        FromEnd="Address"
+        ToEnd="Country" />
+      <NavigationProperty
+        Name="StateProvince"
+        Association="FK_Address_StateProvince"
+        FromEnd="Address"
+        ToEnd="StateProvince" />
+      <NavigationProperty
+        Name="Cases"
         Association="FK_Case_Address"
-        FromEnd="c_Case"
-        ToEnd="Address" />
-      <NavigationProperty
-        Name="CaseType"
-        Association="FK_Case_CaseType"
-        FromEnd="c_Case"
-        ToEnd="CaseType" />
-      <NavigationProperty
-        Name="Person"
-        Association="FK_Case_Person"
-        FromEnd="c_Case"
-        ToEnd="Person" />
-      <NavigationProperty
-        Name="StatusType"
-        Association="FK_Case_StatusType"
-        FromEnd="c_Case"
-        ToEnd="StatusType" />
+        FromEnd="Address"
+        ToEnd="c_Case" />
     </EntityType.Properties>
   </EntityType>
+  <Association
+    Name="FK_Case_Address">
+    <AssociationEnd
+      Name="Address"
+      Multiplicity="One"
+      EntityType="Address">
+      <AssociationEnd.Attributes>
+        <DeleteRule />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="c_Case"
+      Multiplicity="Many"
+      EntityType="c_Case" />
+  </Association>
   <EntityContainer
     Name="CaseManagementData">
     <EntityContainer.Attributes>
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
-      Name="Cases"
+      Name="Addresses"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="c_Case" />
+      EntityType="Address" />
+    <AssociationSet
+      Name="FK_Case_Address"
+      Association="FK_Case_Address">
+      <AssociationSetEnd
+        Name="Address"
+        EntitySet="Addresses" />
+      <AssociationSetEnd
+        Name="c_Case"
+        EntitySet="Cases" />
+    </AssociationSet>
     <QueryOperation
-      Name="Cases_Single"
-      ReturnType="c_Case">
+      Name="Addresses_Single"
+      ReturnType="Address">
       <QueryOperation.Attributes>
         <Generated />
         <Description
@@ -106,7 +139,7 @@
       <QueryOperation.Source>
         <QuerySourceExpressionTree>
           <MemberExpression
-            Member="Cases" />
+            Member="Addresses" />
         </QuerySourceExpressionTree>
       </QueryOperation.Source>
       <QueryOperationParameter
@@ -119,8 +152,8 @@
       </QueryOperationParameter>
     </QueryOperation>
     <QueryOperation
-      Name="Cases_SingleOrDefault"
-      ReturnType="c_Case">
+      Name="Addresses_SingleOrDefault"
+      ReturnType="Address">
       <QueryOperation.Attributes>
         <Generated />
         <Description
@@ -146,7 +179,7 @@
       <QueryOperation.Source>
         <QuerySourceExpressionTree>
           <MemberExpression
-            Member="Cases" />
+            Member="Addresses" />
         </QuerySourceExpressionTree>
       </QueryOperation.Source>
       <QueryOperationParameter
@@ -165,47 +198,72 @@
       <Partial />
     </DataService.Attributes>
     <EntitySetMapping
-      EntitySet="Cases">
+      EntitySet="Addresses">
       <EntitySetMapping.Attributes>
         <SsdlEntitySet
           Schema="dbo"
-          Table="Case" />
+          Table="Address" />
         <SsdlProperty
           Name="Id"
           Nullable="False"
           Type="uniqueidentifier"
-          Property="c_Case/Properties[Id]" />
+          Property="Address/Properties[Id]" />
         <SsdlProperty
-          Name="CreatedOnUtc"
+          MaxLength="255"
+          Name="AddressLine1"
           Nullable="False"
-          Type="datetime"
-          Property="c_Case/Properties[CreatedOnUtc]" />
+          Type="nvarchar"
+          Property="Address/Properties[AddressLine1]" />
         <SsdlProperty
-          Name="LastUpdatedOnUtc"
+          MaxLength="255"
+          Name="AddressLine2"
+          Nullable="True"
+          Type="nvarchar"
+          Property="Address/Properties[AddressLine2]" />
+        <SsdlProperty
+          MaxLength="100"
+          Name="City"
           Nullable="False"
-          Type="datetime"
-          Property="c_Case/Properties[LastUpdatedOnUtc]" />
-        <SsdlForeignKeyProperty
-          Name="AddressId"
+          Type="nvarchar"
+          Property="Address/Properties[City]" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="PostalCode"
           Nullable="False"
-          Type="uniqueidentifier"
-          PropertyName="AddressId" />
+          Type="nvarchar"
+          Property="Address/Properties[PostalCode]" />
         <SsdlForeignKeyProperty
-          Name="CaseTypeId"
+          Name="CountryId"
           Nullable="False"
           Type="int"
-          PropertyName="CaseTypeId" />
+          PropertyName="CountryId" />
         <SsdlForeignKeyProperty
-          Name="PersonId"
-          Nullable="False"
-          Type="uniqueidentifier"
-          PropertyName="PersonId" />
-        <SsdlForeignKeyProperty
-          Name="StatusTypeId"
+          Name="StateProvinceId"
           Nullable="False"
           Type="int"
-          PropertyName="StatusTypeId" />
+          PropertyName="StateProvinceId" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Case_Address">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Case_Address" />
+        <SsdlAssociationSetEnd
+          End="CaseManagementData/Members[FK_Case_Address]/Members[Address]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="CaseManagementData/Members[FK_Case_Address]/Members[c_Case]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="AddressId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
   </DataService>
 </ServiceApplication>
