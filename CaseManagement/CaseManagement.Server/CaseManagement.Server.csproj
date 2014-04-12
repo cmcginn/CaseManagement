@@ -203,6 +203,8 @@
     <LightSwitchModel Include="Properties\DataSources\ApplicationData.lsml" />
     <LightSwitchModel Include="DataSources\ApplicationData\Countries.lsml" />
     <LightSwitchModel Include="DataSources\ApplicationData\StateProvinces.lsml" />
+    <LightSwitchModel Include="DataSources\ApplicationData\CaseTypes.lsml" />
+    <LightSwitchModel Include="DataSources\ApplicationData\StatusTypes.lsml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -28,4 +28,16 @@
         Target="ServiceInterface:StateProvince_Country" />
     </Association.Attributes>
   </Association>
+  <EntityType>
+    <EntityType.Attributes>
+      <Proxy
+        Target="ServiceInterface:CaseType" />
+    </EntityType.Attributes>
+  </EntityType>
+  <EntityType>
+    <EntityType.Attributes>
+      <Proxy
+        Target="ServiceInterface:StatusType" />
+    </EntityType.Attributes>
+  </EntityType>
 </Application>

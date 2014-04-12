@@ -42,6 +42,12 @@
     <ApplicationCommand
       Name="ScreenCommandShowSearchStateProvinces"
       Target="!module/Methods[ShowSearchStateProvinces]" />
+    <ApplicationCommand
+      Name="ScreenCommandShowSearchCaseTypes"
+      Target="!module/Methods[ShowSearchCaseTypes]" />
+    <ApplicationCommand
+      Name="ScreenCommandShowSearchStatusTypes"
+      Target="!module/Methods[ShowSearchStatusTypes]" />
   </Application.Commands>
   <Application.NavigationItems>
     <ApplicationNavigationGroup
@@ -57,6 +63,12 @@
       <ApplicationNavigationLink
         Name="SearchStateProvinces"
         Command="!module/Commands[ScreenCommandShowSearchStateProvinces]" />
+      <ApplicationNavigationLink
+        Name="SearchCaseTypes"
+        Command="!module/Commands[ScreenCommandShowSearchCaseTypes]" />
+      <ApplicationNavigationLink
+        Name="SearchStatusTypes"
+        Command="!module/Commands[ScreenCommandShowSearchStatusTypes]" />
     </ApplicationNavigationGroup>
     <ApplicationNavigationGroup
       Name="Administration">
