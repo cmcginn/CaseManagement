@@ -243,6 +243,7 @@
     <LightSwitchModel Include="Screens\SearchStateProvinces.lsml" />
     <LightSwitchModel Include="Screens\SearchCaseTypes.lsml" />
     <LightSwitchModel Include="Screens\SearchStatusTypes.lsml" />
+    <LightSwitchModel Include="Screens\SearchContacts.lsml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -5,7 +5,7 @@
     <Partial />
   </ServiceApplication.Attributes>
   <EntityType
-    Name="StateProvince">
+    Name="Address">
     <EntityType.Attributes>
       <CreatedModifiedPropertiesEnabled />
     </EntityType.Attributes>
@@ -27,7 +27,7 @@
         </KeyProperty.Attributes>
       </KeyProperty>
       <EntityProperty
-        Name="Name"
+        Name="AddressLine1"
         PropertyType=":String">
         <EntityProperty.Attributes>
           <Required />
@@ -36,24 +36,42 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <EntityProperty
-        Name="Abbreviation"
+        Name="AddressLine2"
         PropertyType=":String">
         <EntityProperty.Attributes>
           <Required />
           <MaxLength
-            Value="2" />
+            Value="255" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="City"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="255" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="PostalCode"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="255" />
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
         Name="Country"
-        Association="StateProvince_Country"
-        FromEnd="StateProvince"
+        Association="Address_Country"
+        FromEnd="Address"
         ToEnd="Country" />
       <NavigationProperty
-        Name="Addresses"
+        Name="StateProvince"
         Association="Address_StateProvince"
-        FromEnd="StateProvince"
-        ToEnd="Address" />
+        FromEnd="Address"
+        ToEnd="StateProvince" />
       <EntityProperty
         Name="CreatedBy"
         IsReadOnly="True"
@@ -112,14 +130,14 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
-      Name="StateProvinces"
+      Name="Addresses"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="StateProvince" />
+      EntityType="Address" />
     <QueryOperation
-      Name="StateProvinces_Single"
-      ReturnType="StateProvince">
+      Name="Addresses_Single"
+      ReturnType="Address">
       <QueryOperation.Attributes>
         <Generated />
         <Description
@@ -145,7 +163,7 @@
       <QueryOperation.Source>
         <QuerySourceExpressionTree>
           <MemberExpression
-            Member="StateProvinces" />
+            Member="Addresses" />
         </QuerySourceExpressionTree>
       </QueryOperation.Source>
       <QueryOperationParameter
@@ -158,8 +176,8 @@
       </QueryOperationParameter>
     </QueryOperation>
     <QueryOperation
-      Name="StateProvinces_SingleOrDefault"
-      ReturnType="StateProvince">
+      Name="Addresses_SingleOrDefault"
+      ReturnType="Address">
       <QueryOperation.Attributes>
         <Generated />
         <Description
@@ -185,7 +203,7 @@
       <QueryOperation.Source>
         <QuerySourceExpressionTree>
           <MemberExpression
-            Member="StateProvinces" />
+            Member="Addresses" />
         </QuerySourceExpressionTree>
       </QueryOperation.Source>
       <QueryOperationParameter
@@ -197,16 +215,6 @@
         </QueryOperationParameter.Attributes>
       </QueryOperationParameter>
     </QueryOperation>
-    <AssociationSet
-      Name="Address_StateProvinces"
-      Association="Address_StateProvince">
-      <AssociationSetEnd
-        Name="Address"
-        EntitySet="Addresses" />
-      <AssociationSetEnd
-        Name="StateProvince"
-        EntitySet="StateProvinces" />
-    </AssociationSet>
   </EntityContainer>
   <DataService
     Name="ApplicationDataMapping">
@@ -214,49 +222,17 @@
       <Partial />
     </DataService.Attributes>
     <EntitySetMapping
-      EntitySet="StateProvinces">
+      EntitySet="Addresses">
       <EntitySetMapping.Attributes>
         <SsdlForeignKeyProperty
-          Name="StateProvince_Country"
+          Name="Address_Country"
           Nullable="False"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="Address_StateProvince"
+          Nullable="True"
           Type="int" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
-    <AssociationSetMapping
-      AssociationSet="Address_StateProvinces">
-      <AssociationSetMapping.Attributes>
-        <SsdlAssociationSet
-          Name="Address_StateProvinces" />
-        <SsdlAssociationSetEnd
-          End="ApplicationData/Members[Address_StateProvinces]/Members[Address]">
-          <SsdlAssociationSetEnd.Attributes>
-            <SsdlPropertyRef
-              Name="Address_StateProvince" />
-          </SsdlAssociationSetEnd.Attributes>
-        </SsdlAssociationSetEnd>
-        <SsdlAssociationSetEnd
-          End="ApplicationData/Members[Address_StateProvinces]/Members[StateProvince]">
-          <SsdlAssociationSetEnd.Attributes>
-            <SsdlPropertyRef
-              Name="Id" />
-          </SsdlAssociationSetEnd.Attributes>
-        </SsdlAssociationSetEnd>
-      </AssociationSetMapping.Attributes>
-    </AssociationSetMapping>
   </DataService>
-  <Association
-    Name="Address_StateProvince">
-    <AssociationEnd
-      Name="Address"
-      Multiplicity="Many"
-      EntityType="Address" />
-    <AssociationEnd
-      Name="StateProvince"
-      EntityType="StateProvince">
-      <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Restrict" />
-      </AssociationEnd.Attributes>
-    </AssociationEnd>
-  </Association>
 </ServiceApplication>

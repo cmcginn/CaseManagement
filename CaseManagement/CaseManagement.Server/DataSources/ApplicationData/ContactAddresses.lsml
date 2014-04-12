@@ -5,7 +5,7 @@
     <Partial />
   </ServiceApplication.Attributes>
   <EntityType
-    Name="StateProvince">
+    Name="ContactAddress">
     <EntityType.Attributes>
       <CreatedModifiedPropertiesEnabled />
     </EntityType.Attributes>
@@ -26,34 +26,11 @@
           <NotSearchable />
         </KeyProperty.Attributes>
       </KeyProperty>
-      <EntityProperty
-        Name="Name"
-        PropertyType=":String">
-        <EntityProperty.Attributes>
-          <Required />
-          <MaxLength
-            Value="255" />
-        </EntityProperty.Attributes>
-      </EntityProperty>
-      <EntityProperty
-        Name="Abbreviation"
-        PropertyType=":String">
-        <EntityProperty.Attributes>
-          <Required />
-          <MaxLength
-            Value="2" />
-        </EntityProperty.Attributes>
-      </EntityProperty>
       <NavigationProperty
-        Name="Country"
-        Association="StateProvince_Country"
-        FromEnd="StateProvince"
-        ToEnd="Country" />
-      <NavigationProperty
-        Name="Addresses"
-        Association="Address_StateProvince"
-        FromEnd="StateProvince"
-        ToEnd="Address" />
+        Name="Contact"
+        Association="ContactAddress_Contact"
+        FromEnd="ContactAddress"
+        ToEnd="Contact" />
       <EntityProperty
         Name="CreatedBy"
         IsReadOnly="True"
@@ -112,14 +89,14 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
-      Name="StateProvinces"
+      Name="ContactAddresses"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="StateProvince" />
+      EntityType="ContactAddress" />
     <QueryOperation
-      Name="StateProvinces_Single"
-      ReturnType="StateProvince">
+      Name="ContactAddresses_Single"
+      ReturnType="ContactAddress">
       <QueryOperation.Attributes>
         <Generated />
         <Description
@@ -145,7 +122,7 @@
       <QueryOperation.Source>
         <QuerySourceExpressionTree>
           <MemberExpression
-            Member="StateProvinces" />
+            Member="ContactAddresses" />
         </QuerySourceExpressionTree>
       </QueryOperation.Source>
       <QueryOperationParameter
@@ -158,8 +135,8 @@
       </QueryOperationParameter>
     </QueryOperation>
     <QueryOperation
-      Name="StateProvinces_SingleOrDefault"
-      ReturnType="StateProvince">
+      Name="ContactAddresses_SingleOrDefault"
+      ReturnType="ContactAddress">
       <QueryOperation.Attributes>
         <Generated />
         <Description
@@ -185,7 +162,7 @@
       <QueryOperation.Source>
         <QuerySourceExpressionTree>
           <MemberExpression
-            Member="StateProvinces" />
+            Member="ContactAddresses" />
         </QuerySourceExpressionTree>
       </QueryOperation.Source>
       <QueryOperationParameter
@@ -197,16 +174,6 @@
         </QueryOperationParameter.Attributes>
       </QueryOperationParameter>
     </QueryOperation>
-    <AssociationSet
-      Name="Address_StateProvinces"
-      Association="Address_StateProvince">
-      <AssociationSetEnd
-        Name="Address"
-        EntitySet="Addresses" />
-      <AssociationSetEnd
-        Name="StateProvince"
-        EntitySet="StateProvinces" />
-    </AssociationSet>
   </EntityContainer>
   <DataService
     Name="ApplicationDataMapping">
@@ -214,49 +181,13 @@
       <Partial />
     </DataService.Attributes>
     <EntitySetMapping
-      EntitySet="StateProvinces">
+      EntitySet="ContactAddresses">
       <EntitySetMapping.Attributes>
         <SsdlForeignKeyProperty
-          Name="StateProvince_Country"
+          Name="ContactAddress_Contact"
           Nullable="False"
           Type="int" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
-    <AssociationSetMapping
-      AssociationSet="Address_StateProvinces">
-      <AssociationSetMapping.Attributes>
-        <SsdlAssociationSet
-          Name="Address_StateProvinces" />
-        <SsdlAssociationSetEnd
-          End="ApplicationData/Members[Address_StateProvinces]/Members[Address]">
-          <SsdlAssociationSetEnd.Attributes>
-            <SsdlPropertyRef
-              Name="Address_StateProvince" />
-          </SsdlAssociationSetEnd.Attributes>
-        </SsdlAssociationSetEnd>
-        <SsdlAssociationSetEnd
-          End="ApplicationData/Members[Address_StateProvinces]/Members[StateProvince]">
-          <SsdlAssociationSetEnd.Attributes>
-            <SsdlPropertyRef
-              Name="Id" />
-          </SsdlAssociationSetEnd.Attributes>
-        </SsdlAssociationSetEnd>
-      </AssociationSetMapping.Attributes>
-    </AssociationSetMapping>
   </DataService>
-  <Association
-    Name="Address_StateProvince">
-    <AssociationEnd
-      Name="Address"
-      Multiplicity="Many"
-      EntityType="Address" />
-    <AssociationEnd
-      Name="StateProvince"
-      EntityType="StateProvince">
-      <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Restrict" />
-      </AssociationEnd.Attributes>
-    </AssociationEnd>
-  </Association>
 </ServiceApplication>

@@ -5,7 +5,7 @@
     <Partial />
   </ServiceApplication.Attributes>
   <EntityType
-    Name="StateProvince">
+    Name="Contact">
     <EntityType.Attributes>
       <CreatedModifiedPropertiesEnabled />
     </EntityType.Attributes>
@@ -27,33 +27,34 @@
         </KeyProperty.Attributes>
       </KeyProperty>
       <EntityProperty
-        Name="Name"
-        PropertyType=":String">
+        Name="FirstName"
+        PropertyType=":String?">
         <EntityProperty.Attributes>
-          <Required />
           <MaxLength
             Value="255" />
         </EntityProperty.Attributes>
       </EntityProperty>
       <EntityProperty
-        Name="Abbreviation"
-        PropertyType=":String">
+        Name="LastName"
+        PropertyType=":String?">
         <EntityProperty.Attributes>
-          <Required />
           <MaxLength
-            Value="2" />
+            Value="255" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Company"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="255" />
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
-        Name="Country"
-        Association="StateProvince_Country"
-        FromEnd="StateProvince"
-        ToEnd="Country" />
-      <NavigationProperty
-        Name="Addresses"
-        Association="Address_StateProvince"
-        FromEnd="StateProvince"
-        ToEnd="Address" />
+        Name="ContactAddresses"
+        Association="ContactAddress_Contact"
+        FromEnd="Contact"
+        ToEnd="ContactAddress" />
       <EntityProperty
         Name="CreatedBy"
         IsReadOnly="True"
@@ -112,14 +113,14 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
-      Name="StateProvinces"
+      Name="Contacts"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="StateProvince" />
+      EntityType="Contact" />
     <QueryOperation
-      Name="StateProvinces_Single"
-      ReturnType="StateProvince">
+      Name="Contacts_Single"
+      ReturnType="Contact">
       <QueryOperation.Attributes>
         <Generated />
         <Description
@@ -145,7 +146,7 @@
       <QueryOperation.Source>
         <QuerySourceExpressionTree>
           <MemberExpression
-            Member="StateProvinces" />
+            Member="Contacts" />
         </QuerySourceExpressionTree>
       </QueryOperation.Source>
       <QueryOperationParameter
@@ -158,8 +159,8 @@
       </QueryOperationParameter>
     </QueryOperation>
     <QueryOperation
-      Name="StateProvinces_SingleOrDefault"
-      ReturnType="StateProvince">
+      Name="Contacts_SingleOrDefault"
+      ReturnType="Contact">
       <QueryOperation.Attributes>
         <Generated />
         <Description
@@ -185,7 +186,7 @@
       <QueryOperation.Source>
         <QuerySourceExpressionTree>
           <MemberExpression
-            Member="StateProvinces" />
+            Member="Contacts" />
         </QuerySourceExpressionTree>
       </QueryOperation.Source>
       <QueryOperationParameter
@@ -198,44 +199,51 @@
       </QueryOperationParameter>
     </QueryOperation>
     <AssociationSet
-      Name="Address_StateProvinces"
-      Association="Address_StateProvince">
+      Name="ContactAddress_Contacts"
+      Association="ContactAddress_Contact">
       <AssociationSetEnd
-        Name="Address"
-        EntitySet="Addresses" />
+        Name="ContactAddress"
+        EntitySet="ContactAddresses" />
       <AssociationSetEnd
-        Name="StateProvince"
-        EntitySet="StateProvinces" />
+        Name="Contact"
+        EntitySet="Contacts" />
     </AssociationSet>
   </EntityContainer>
+  <Association
+    Name="ContactAddress_Contact">
+    <AssociationEnd
+      Name="ContactAddress"
+      Multiplicity="Many"
+      EntityType="ContactAddress" />
+    <AssociationEnd
+      Name="Contact"
+      Multiplicity="One"
+      EntityType="Contact">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Restrict" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+  </Association>
   <DataService
     Name="ApplicationDataMapping">
     <DataService.Attributes>
       <Partial />
     </DataService.Attributes>
-    <EntitySetMapping
-      EntitySet="StateProvinces">
-      <EntitySetMapping.Attributes>
-        <SsdlForeignKeyProperty
-          Name="StateProvince_Country"
-          Nullable="False"
-          Type="int" />
-      </EntitySetMapping.Attributes>
-    </EntitySetMapping>
     <AssociationSetMapping
-      AssociationSet="Address_StateProvinces">
+      AssociationSet="ContactAddress_Contacts">
       <AssociationSetMapping.Attributes>
         <SsdlAssociationSet
-          Name="Address_StateProvinces" />
+          Name="ContactAddress_Contacts" />
         <SsdlAssociationSetEnd
-          End="ApplicationData/Members[Address_StateProvinces]/Members[Address]">
+          End="ApplicationData/Members[ContactAddress_Contacts]/Members[ContactAddress]">
           <SsdlAssociationSetEnd.Attributes>
             <SsdlPropertyRef
-              Name="Address_StateProvince" />
+              Name="ContactAddress_Contact" />
           </SsdlAssociationSetEnd.Attributes>
         </SsdlAssociationSetEnd>
         <SsdlAssociationSetEnd
-          End="ApplicationData/Members[Address_StateProvinces]/Members[StateProvince]">
+          End="ApplicationData/Members[ContactAddress_Contacts]/Members[Contact]">
           <SsdlAssociationSetEnd.Attributes>
             <SsdlPropertyRef
               Name="Id" />
@@ -244,19 +252,4 @@
       </AssociationSetMapping.Attributes>
     </AssociationSetMapping>
   </DataService>
-  <Association
-    Name="Address_StateProvince">
-    <AssociationEnd
-      Name="Address"
-      Multiplicity="Many"
-      EntityType="Address" />
-    <AssociationEnd
-      Name="StateProvince"
-      EntityType="StateProvince">
-      <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Restrict" />
-      </AssociationEnd.Attributes>
-    </AssociationEnd>
-  </Association>
 </ServiceApplication>

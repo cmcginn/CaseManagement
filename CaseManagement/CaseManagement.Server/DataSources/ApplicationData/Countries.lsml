@@ -66,6 +66,11 @@
         Association="StateProvince_Country"
         FromEnd="Country"
         ToEnd="StateProvince" />
+      <NavigationProperty
+        Name="Addresses"
+        Association="Address_Country"
+        FromEnd="Country"
+        ToEnd="Address" />
       <EntityProperty
         Name="CreatedBy"
         IsReadOnly="True"
@@ -219,6 +224,16 @@
         Name="Country"
         EntitySet="Countries" />
     </AssociationSet>
+    <AssociationSet
+      Name="Address_Countries"
+      Association="Address_Country">
+      <AssociationSetEnd
+        Name="Address"
+        EntitySet="Addresses" />
+      <AssociationSetEnd
+        Name="Country"
+        EntitySet="Countries" />
+    </AssociationSet>
   </EntityContainer>
   <Association
     Name="StateProvince_Country">
@@ -262,5 +277,42 @@
         </SsdlAssociationSetEnd>
       </AssociationSetMapping.Attributes>
     </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="Address_Countries">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="Address_Countries" />
+        <SsdlAssociationSetEnd
+          End="ApplicationData/Members[Address_Countries]/Members[Address]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Address_Country" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="ApplicationData/Members[Address_Countries]/Members[Country]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
   </DataService>
+  <Association
+    Name="Address_Country">
+    <AssociationEnd
+      Name="Address"
+      Multiplicity="Many"
+      EntityType="Address" />
+    <AssociationEnd
+      Name="Country"
+      Multiplicity="One"
+      EntityType="Country">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Restrict" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+  </Association>
 </ServiceApplication>

@@ -48,6 +48,9 @@
     <ApplicationCommand
       Name="ScreenCommandShowSearchStatusTypes"
       Target="!module/Methods[ShowSearchStatusTypes]" />
+    <ApplicationCommand
+      Name="ScreenCommandShowSearchContacts"
+      Target="!module/Methods[ShowSearchContacts]" />
   </Application.Commands>
   <Application.NavigationItems>
     <ApplicationNavigationGroup
@@ -69,6 +72,9 @@
       <ApplicationNavigationLink
         Name="SearchStatusTypes"
         Command="!module/Commands[ScreenCommandShowSearchStatusTypes]" />
+      <ApplicationNavigationLink
+        Name="SearchContacts"
+        Command="!module/Commands[ScreenCommandShowSearchContacts]" />
     </ApplicationNavigationGroup>
     <ApplicationNavigationGroup
       Name="Administration">
