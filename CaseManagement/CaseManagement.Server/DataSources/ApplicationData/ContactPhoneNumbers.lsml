@@ -5,7 +5,7 @@
     <Partial />
   </ServiceApplication.Attributes>
   <EntityType
-    Name="ContactAddress">
+    Name="ContactPhoneNumber">
     <EntityType.Attributes>
       <CreatedModifiedPropertiesEnabled />
     </EntityType.Attributes>
@@ -26,19 +26,20 @@
           <NotSearchable />
         </KeyProperty.Attributes>
       </KeyProperty>
-      <NavigationProperty
-        Name="Contact"
-        Association="ContactAddress_Contact"
-        FromEnd="ContactAddress"
-        ToEnd="Contact" />
       <EntityProperty
-        Name="Primary"
-        PropertyType=":Boolean">
+        Name="PhoneNumber"
+        PropertyType="Microsoft.LightSwitch.Extensions:PhoneNumber">
         <EntityProperty.Attributes>
           <Required />
-          <NotSearchable />
+          <MaxLength
+            Value="255" />
         </EntityProperty.Attributes>
       </EntityProperty>
+      <NavigationProperty
+        Name="Contact"
+        Association="ContactPhoneNumber_Contact"
+        FromEnd="ContactPhoneNumber"
+        ToEnd="Contact" />
       <EntityProperty
         Name="CreatedBy"
         IsReadOnly="True"
@@ -97,14 +98,14 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
-      Name="ContactAddresses"
+      Name="ContactPhoneNumbers"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="ContactAddress" />
+      EntityType="ContactPhoneNumber" />
     <QueryOperation
-      Name="ContactAddresses_Single"
-      ReturnType="ContactAddress">
+      Name="ContactPhoneNumbers_Single"
+      ReturnType="ContactPhoneNumber">
       <QueryOperation.Attributes>
         <Generated />
         <Description
@@ -130,7 +131,7 @@
       <QueryOperation.Source>
         <QuerySourceExpressionTree>
           <MemberExpression
-            Member="ContactAddresses" />
+            Member="ContactPhoneNumbers" />
         </QuerySourceExpressionTree>
       </QueryOperation.Source>
       <QueryOperationParameter
@@ -143,8 +144,8 @@
       </QueryOperationParameter>
     </QueryOperation>
     <QueryOperation
-      Name="ContactAddresses_SingleOrDefault"
-      ReturnType="ContactAddress">
+      Name="ContactPhoneNumbers_SingleOrDefault"
+      ReturnType="ContactPhoneNumber">
       <QueryOperation.Attributes>
         <Generated />
         <Description
@@ -170,7 +171,7 @@
       <QueryOperation.Source>
         <QuerySourceExpressionTree>
           <MemberExpression
-            Member="ContactAddresses" />
+            Member="ContactPhoneNumbers" />
         </QuerySourceExpressionTree>
       </QueryOperation.Source>
       <QueryOperationParameter
@@ -189,10 +190,10 @@
       <Partial />
     </DataService.Attributes>
     <EntitySetMapping
-      EntitySet="ContactAddresses">
+      EntitySet="ContactPhoneNumbers">
       <EntitySetMapping.Attributes>
         <SsdlForeignKeyProperty
-          Name="ContactAddress_Contact"
+          Name="ContactPhoneNumber_Contact"
           Nullable="False"
           Type="int" />
       </EntitySetMapping.Attributes>

@@ -55,6 +55,16 @@
         Association="ContactAddress_Contact"
         FromEnd="Contact"
         ToEnd="ContactAddress" />
+      <NavigationProperty
+        Name="ContactEmailAddresses"
+        Association="ContactEmailAddress_Contact"
+        FromEnd="Contact"
+        ToEnd="ContactEmailAddress" />
+      <NavigationProperty
+        Name="ContactPhoneNumbers"
+        Association="ContactPhoneNumber_Contact"
+        FromEnd="Contact"
+        ToEnd="ContactPhoneNumber" />
       <EntityProperty
         Name="CreatedBy"
         IsReadOnly="True"
@@ -208,6 +218,26 @@
         Name="Contact"
         EntitySet="Contacts" />
     </AssociationSet>
+    <AssociationSet
+      Name="ContactEmailAddress_Contacts"
+      Association="ContactEmailAddress_Contact">
+      <AssociationSetEnd
+        Name="ContactEmailAddress"
+        EntitySet="ContactEmailAddresses" />
+      <AssociationSetEnd
+        Name="Contact"
+        EntitySet="Contacts" />
+    </AssociationSet>
+    <AssociationSet
+      Name="ContactPhoneNumber_Contacts"
+      Association="ContactPhoneNumber_Contact">
+      <AssociationSetEnd
+        Name="ContactPhoneNumber"
+        EntitySet="ContactPhoneNumbers" />
+      <AssociationSetEnd
+        Name="Contact"
+        EntitySet="Contacts" />
+    </AssociationSet>
   </EntityContainer>
   <Association
     Name="ContactAddress_Contact">
@@ -251,5 +281,79 @@
         </SsdlAssociationSetEnd>
       </AssociationSetMapping.Attributes>
     </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="ContactEmailAddress_Contacts">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="ContactEmailAddress_Contacts" />
+        <SsdlAssociationSetEnd
+          End="ApplicationData/Members[ContactEmailAddress_Contacts]/Members[ContactEmailAddress]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ContactEmailAddress_Contact" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="ApplicationData/Members[ContactEmailAddress_Contacts]/Members[Contact]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="ContactPhoneNumber_Contacts">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="ContactPhoneNumber_Contacts" />
+        <SsdlAssociationSetEnd
+          End="ApplicationData/Members[ContactPhoneNumber_Contacts]/Members[ContactPhoneNumber]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ContactPhoneNumber_Contact" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="ApplicationData/Members[ContactPhoneNumber_Contacts]/Members[Contact]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
   </DataService>
+  <Association
+    Name="ContactEmailAddress_Contact">
+    <AssociationEnd
+      Name="ContactEmailAddress"
+      Multiplicity="Many"
+      EntityType="ContactEmailAddress" />
+    <AssociationEnd
+      Name="Contact"
+      Multiplicity="One"
+      EntityType="Contact">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Restrict" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+  </Association>
+  <Association
+    Name="ContactPhoneNumber_Contact">
+    <AssociationEnd
+      Name="ContactPhoneNumber"
+      Multiplicity="Many"
+      EntityType="ContactPhoneNumber" />
+    <AssociationEnd
+      Name="Contact"
+      Multiplicity="One"
+      EntityType="Contact">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Restrict" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+  </Association>
 </ServiceApplication>

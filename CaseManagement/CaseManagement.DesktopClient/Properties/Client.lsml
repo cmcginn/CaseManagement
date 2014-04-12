@@ -51,6 +51,9 @@
     <ApplicationCommand
       Name="ScreenCommandShowSearchContacts"
       Target="!module/Methods[ShowSearchContacts]" />
+    <ApplicationCommand
+      Name="ScreenCommandShowCreateNewContact"
+      Target="!module/Methods[ShowCreateNewContact]" />
   </Application.Commands>
   <Application.NavigationItems>
     <ApplicationNavigationGroup
@@ -75,6 +78,9 @@
       <ApplicationNavigationLink
         Name="SearchContacts"
         Command="!module/Commands[ScreenCommandShowSearchContacts]" />
+      <ApplicationNavigationLink
+        Name="CreateNewContact"
+        Command="!module/Commands[ScreenCommandShowCreateNewContact]" />
     </ApplicationNavigationGroup>
     <ApplicationNavigationGroup
       Name="Administration">

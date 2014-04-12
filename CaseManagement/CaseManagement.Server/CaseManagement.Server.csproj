@@ -208,6 +208,11 @@
     <LightSwitchModel Include="DataSources\ApplicationData\Contacts.lsml" />
     <LightSwitchModel Include="DataSources\ApplicationData\Addresses.lsml" />
     <LightSwitchModel Include="DataSources\ApplicationData\ContactAddresses.lsml" />
+    <LightSwitchModel Include="DataSources\ApplicationData\ContactAddressesByContactId.lsml">
+      <DependentUpon>ContactAddresses.lsml</DependentUpon>
+    </LightSwitchModel>
+    <LightSwitchModel Include="DataSources\ApplicationData\ContactEmailAddresses.lsml" />
+    <LightSwitchModel Include="DataSources\ApplicationData\ContactPhoneNumbers.lsml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
