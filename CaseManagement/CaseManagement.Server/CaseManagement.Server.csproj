@@ -191,6 +191,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataSources\ApplicationData\ContactAddress.lsml.cs">
+      <DependentUpon>ContactAddresses.lsml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -213,6 +216,12 @@
     </LightSwitchModel>
     <LightSwitchModel Include="DataSources\ApplicationData\ContactEmailAddresses.lsml" />
     <LightSwitchModel Include="DataSources\ApplicationData\ContactPhoneNumbers.lsml" />
+    <LightSwitchModel Include="DataSources\ApplicationData\Query1.lsml">
+      <DependentUpon>Addresses.lsml</DependentUpon>
+    </LightSwitchModel>
+    <LightSwitchModel Include="DataSources\ApplicationData\StateProvincesByCountryId.lsml">
+      <DependentUpon>StateProvinces.lsml</DependentUpon>
+    </LightSwitchModel>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
