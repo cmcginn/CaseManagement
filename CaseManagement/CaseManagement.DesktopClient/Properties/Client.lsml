@@ -39,6 +39,9 @@
     <ApplicationCommand
       Name="ScreenCommandShowSearchCountries"
       Target="!module/Methods[ShowSearchCountries]" />
+    <ApplicationCommand
+      Name="ScreenCommandShowSearchStateProvinces"
+      Target="!module/Methods[ShowSearchStateProvinces]" />
   </Application.Commands>
   <Application.NavigationItems>
     <ApplicationNavigationGroup
@@ -51,6 +54,9 @@
       <ApplicationNavigationLink
         Name="SearchCountries"
         Command="!module/Commands[ScreenCommandShowSearchCountries]" />
+      <ApplicationNavigationLink
+        Name="SearchStateProvinces"
+        Command="!module/Commands[ScreenCommandShowSearchStateProvinces]" />
     </ApplicationNavigationGroup>
     <ApplicationNavigationGroup
       Name="Administration">

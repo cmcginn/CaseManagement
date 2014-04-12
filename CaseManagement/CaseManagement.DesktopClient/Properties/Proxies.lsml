@@ -16,4 +16,16 @@
         Target="ServiceInterface:Country" />
     </EntityType.Attributes>
   </EntityType>
+  <EntityType>
+    <EntityType.Attributes>
+      <Proxy
+        Target="ServiceInterface:StateProvince" />
+    </EntityType.Attributes>
+  </EntityType>
+  <Association>
+    <Association.Attributes>
+      <Proxy
+        Target="ServiceInterface:StateProvince_Country" />
+    </Association.Attributes>
+  </Association>
 </Application>

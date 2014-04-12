@@ -10,6 +10,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaseManagement.DesktopClient", "CaseManagement.DesktopClient\CaseManagement.DesktopClient.csproj", "{FBB63D98-4F96-41FA-B831-EA1637E7704A}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "CaseManagementData", "..\CaseManagementData\CaseManagementData.sqlproj", "{B9595970-B1A3-450D-BF5B-E412F100A0F8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E6B27FA8-C4E7-4142-8B7D-4D8A07E65510} = {E6B27FA8-C4E7-4142-8B7D-4D8A07E65510}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
