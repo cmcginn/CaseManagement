@@ -7,22 +7,20 @@ using Microsoft.LightSwitch;
 using Microsoft.LightSwitch.Framework.Client;
 using Microsoft.LightSwitch.Presentation;
 using Microsoft.LightSwitch.Presentation.Extensions;
-
 namespace LightSwitchApplication
 {
-    public partial class CreateNewContact
+    public partial class SearchContacts
     {
-        partial void CreateNewContact_InitializeDataWorkspace(global::System.Collections.Generic.List<global::Microsoft.LightSwitch.IDataService> saveChangesTo)
+        partial void gridAddAndEditNew_CanExecute(ref bool result)
         {
             // Write your code here.
-            this.ContactProperty = new Contact();
+
         }
 
-        partial void CreateNewContact_Saved()
+        partial void gridAddAndEditNew_Execute()
         {
             // Write your code here.
-            this.Close(false);
-            Application.Current.ShowDefaultScreen(this.ContactProperty);
+            Application.ShowContactDetail(null);
         }
     }
 }

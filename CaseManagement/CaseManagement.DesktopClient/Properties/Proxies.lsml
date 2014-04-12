@@ -94,4 +94,10 @@
         Target="ServiceInterface:ContactPhoneNumber_Contact" />
     </Association.Attributes>
   </Association>
+  <Association>
+    <Association.Attributes>
+      <Proxy
+        Target="ServiceInterface:ContactAddress_Address" />
+    </Association.Attributes>
+  </Association>
 </Application>

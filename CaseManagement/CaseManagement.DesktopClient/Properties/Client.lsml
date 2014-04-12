@@ -52,13 +52,13 @@
       Name="ScreenCommandShowSearchContacts"
       Target="!module/Methods[ShowSearchContacts]" />
     <ApplicationCommand
-      Name="ScreenCommandShowCreateNewContact"
-      Target="!module/Methods[ShowCreateNewContact]" />
+      Name="ScreenCommandShowContactDetail"
+      Target="!module/Methods[ShowContactDetail]" />
   </Application.Commands>
   <Application.NavigationItems>
     <ApplicationNavigationGroup
       Name="Tasks"
-      DefaultItem="!module/NavigationItems[Tasks]/Children[SearchCountries]">
+      DefaultItem="!module/NavigationItems[Tasks]/Children[SearchContacts]">
       <ApplicationNavigationGroup.Attributes>
         <DisplayName
           Value="Tasks" />
@@ -79,8 +79,8 @@
         Name="SearchContacts"
         Command="!module/Commands[ScreenCommandShowSearchContacts]" />
       <ApplicationNavigationLink
-        Name="CreateNewContact"
-        Command="!module/Commands[ScreenCommandShowCreateNewContact]" />
+        Name="ContactDetail"
+        Command="!module/Commands[ScreenCommandShowContactDetail]" />
     </ApplicationNavigationGroup>
     <ApplicationNavigationGroup
       Name="Administration">

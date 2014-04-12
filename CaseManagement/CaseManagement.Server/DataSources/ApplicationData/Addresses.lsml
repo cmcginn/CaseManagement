@@ -72,6 +72,11 @@
         Association="Address_StateProvince"
         FromEnd="Address"
         ToEnd="StateProvince" />
+      <NavigationProperty
+        Name="ContactAddresses"
+        Association="ContactAddress_Address"
+        FromEnd="Address"
+        ToEnd="ContactAddress" />
       <EntityProperty
         Name="CreatedBy"
         IsReadOnly="True"
@@ -215,6 +220,16 @@
         </QueryOperationParameter.Attributes>
       </QueryOperationParameter>
     </QueryOperation>
+    <AssociationSet
+      Name="ContactAddress_Addresses"
+      Association="ContactAddress_Address">
+      <AssociationSetEnd
+        Name="ContactAddress"
+        EntitySet="ContactAddresses" />
+      <AssociationSetEnd
+        Name="Address"
+        EntitySet="Addresses" />
+    </AssociationSet>
   </EntityContainer>
   <DataService
     Name="ApplicationDataMapping">
@@ -234,5 +249,42 @@
           Type="int" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="ContactAddress_Addresses">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="ContactAddress_Addresses" />
+        <SsdlAssociationSetEnd
+          End="ApplicationData/Members[ContactAddress_Addresses]/Members[ContactAddress]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ContactAddress_Address" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="ApplicationData/Members[ContactAddress_Addresses]/Members[Address]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
   </DataService>
+  <Association
+    Name="ContactAddress_Address">
+    <AssociationEnd
+      Name="ContactAddress"
+      Multiplicity="Many"
+      EntityType="ContactAddress" />
+    <AssociationEnd
+      Name="Address"
+      Multiplicity="One"
+      EntityType="Address">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Restrict" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+  </Association>
 </ServiceApplication>

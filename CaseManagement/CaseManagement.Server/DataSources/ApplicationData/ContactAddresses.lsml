@@ -39,6 +39,11 @@
           <NotSearchable />
         </EntityProperty.Attributes>
       </EntityProperty>
+      <NavigationProperty
+        Name="Address"
+        Association="ContactAddress_Address"
+        FromEnd="ContactAddress"
+        ToEnd="Address" />
       <EntityProperty
         Name="CreatedBy"
         IsReadOnly="True"
@@ -193,6 +198,10 @@
       <EntitySetMapping.Attributes>
         <SsdlForeignKeyProperty
           Name="ContactAddress_Contact"
+          Nullable="False"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="ContactAddress_Address"
           Nullable="False"
           Type="int" />
       </EntitySetMapping.Attributes>

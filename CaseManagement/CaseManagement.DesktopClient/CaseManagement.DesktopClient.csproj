@@ -233,8 +233,8 @@
     <Compile Include="Screens\ContactDetail.lsml.cs">
       <DependentUpon>ContactDetail.lsml</DependentUpon>
     </Compile>
-    <Compile Include="Screens\CreateNewContact.lsml.cs">
-      <DependentUpon>CreateNewContact.lsml</DependentUpon>
+    <Compile Include="Screens\SearchContacts.lsml.cs">
+      <DependentUpon>SearchContacts.lsml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -252,7 +252,6 @@
     <LightSwitchModel Include="Screens\SearchStatusTypes.lsml" />
     <LightSwitchModel Include="Screens\SearchContacts.lsml" />
     <LightSwitchModel Include="Screens\ContactDetail.lsml" />
-    <LightSwitchModel Include="Screens\CreateNewContact.lsml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

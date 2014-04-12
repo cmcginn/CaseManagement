@@ -157,15 +157,17 @@
             </ContentItem>
             <ContentItem.CommandItems>
               <ContentItem
-                Name="Contacts_AddAndEditNew"
+                Name="gridAddAndEditNew"
                 Kind="Command">
+                <ContentItem.Attributes>
+                  <DisplayName
+                    Value="Add..." />
+                </ContentItem.Attributes>
                 <ContentItem.DataSource>
                   <ScreenExpressionTree>
                     <ChainExpression>
-                      <MemberExpression
-                        Member="SearchContacts/Properties[Contacts]" />
                       <CallExpression
-                        Target="AddAndEditNew" />
+                        Target="SearchContacts/Methods[gridAddAndEditNew]" />
                     </ChainExpression>
                   </ScreenExpressionTree>
                 </ContentItem.DataSource>
@@ -260,6 +262,13 @@
           <DisplayMethodByDefault
             Display="True" />
           <Generated />
+        </ScreenMethod.Attributes>
+      </ScreenMethod>
+      <ScreenMethod
+        Name="gridAddAndEditNew">
+        <ScreenMethod.Attributes>
+          <BuiltInMethodOverride
+            MethodName="AddAndEditNew" />
         </ScreenMethod.Attributes>
       </ScreenMethod>
     </Screen.Methods>

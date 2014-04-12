@@ -12,22 +12,32 @@ namespace LightSwitchApplication
 {
     public partial class ContactDetail
     {
-        partial void Contact_Loaded(bool succeeded)
+      
+        partial void ContactDetail_Created()
         {
-            // Write your code here.
-            this.SetDisplayNameFromEntity(this.Contact);
+            if (ContactId.HasValue)
+                ScreenData = this.DataWorkspace.ApplicationData.Contacts_SingleOrDefault(ContactId.Value);
+                   // Application.CreateDataWorkspace().ApplicationData.Contacts_SingleOrDefault(ContactId.Value);
+            else
+                ScreenData =  this.DataWorkspace.ApplicationData.Contacts.AddNew();
+            //else
+
+            this.SetDisplayNameFromEntity(this.ScreenData);
+
         }
 
-        partial void Contact_Changed()
+        partial void ContactAddressesAddAndEditNew_CanExecute(ref bool result)
         {
             // Write your code here.
-            this.SetDisplayNameFromEntity(this.Contact);
+
         }
 
-        partial void ContactDetail_Saved()
+        partial void ContactAddressesAddAndEditNew_Execute()
         {
             // Write your code here.
-            this.SetDisplayNameFromEntity(this.Contact);
+            this.OpenModalWindow("AddressSearch");
         }
+
+        
     }
 }
