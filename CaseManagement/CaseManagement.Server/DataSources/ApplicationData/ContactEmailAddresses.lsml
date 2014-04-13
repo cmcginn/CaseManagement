@@ -28,7 +28,7 @@
       </KeyProperty>
       <EntityProperty
         Name="EmailAddress"
-        PropertyType=":String">
+        PropertyType="Microsoft.LightSwitch.Extensions:EmailAddress">
         <EntityProperty.Attributes>
           <Required />
           <MaxLength

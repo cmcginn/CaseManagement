@@ -194,6 +194,7 @@
     <Compile Include="DataSources\ApplicationData\ContactAddress.lsml.cs">
       <DependentUpon>ContactAddresses.lsml</DependentUpon>
     </Compile>
+    <Compile Include="DataSources\ApplicationData\_ApplicationDataService.lsml.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

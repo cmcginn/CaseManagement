@@ -41,6 +41,14 @@
         FromEnd="ContactPhoneNumber"
         ToEnd="Contact" />
       <EntityProperty
+        Name="Primary"
+        PropertyType=":Boolean">
+        <EntityProperty.Attributes>
+          <Required />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
         Name="CreatedBy"
         IsReadOnly="True"
         PropertyType=":Person?">

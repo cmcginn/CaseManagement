@@ -13,6 +13,17 @@ namespace LightSwitchApplication
 {
     public partial class ContactDetail
     {
+        void SetContactEmailAddressProperties()
+        {
+            var primaryEmailAddress = ContactEmailAddresses.FirstOrDefault(x => x.Primary);
+            //if(primaryEmailAddress != null)
+            //    this.
+            ContactEmailAddresses.ToList().ForEach(x =>
+            {
+                this.FindControlInCollection("SetPrimaryEmailAddress", x).IsVisible = x.Primary == false;
+
+            });
+        }
         void SetContactAddressProperties()
         {
             var primaryAddress = ContactAddresses.FirstOrDefault(x => x.Primary);
@@ -35,6 +46,7 @@ namespace LightSwitchApplication
 
             this.SetDisplayNameFromEntity(this.ScreenData);
             SetContactAddressProperties();
+            SetContactEmailAddressProperties();
 
         }
 
@@ -87,6 +99,14 @@ namespace LightSwitchApplication
             this.ContactAddresses.Where(x => x.Primary).ToList().ForEach(x => x.Primary = false);
             this.ContactAddresses.SelectedItem.Primary = true;
             SetContactAddressProperties();
+        }
+
+        partial void SetPrimaryEmailAddress_Execute()
+        {
+            // Write your code here.
+            this.ContactEmailAddresses.Where(x => x.Primary).ToList().ForEach(x => x.Primary = false);
+            this.ContactEmailAddresses.SelectedItem.Primary = true;
+            SetContactEmailAddressProperties();
         }
 
 
