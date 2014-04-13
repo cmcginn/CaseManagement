@@ -11,12 +11,13 @@ using Microsoft.LightSwitch.Presentation.Extensions;
 
 namespace LightSwitchApplication
 {
-    public partial class ContactDetail
+    public partial class ContactDetailOld
     {
         void SetContactEmailAddressProperties()
         {
             var primaryEmailAddress = ContactEmailAddresses.FirstOrDefault(x => x.Primary);
-
+            //if(primaryEmailAddress != null)
+            //    this.
             ContactEmailAddresses.ToList().ForEach(x =>
             {
                 this.FindControlInCollection("SetPrimaryEmailAddress", x).IsVisible = x.Primary == false;
@@ -49,13 +50,35 @@ namespace LightSwitchApplication
 
         }
 
+        partial void ContactAddressesAddAndEditNew_CanExecute(ref bool result)
+        {
+            // Write your code here.
 
+        }
 
+        partial void ContactAddressesAddAndEditNew_Execute()
+        {
+            // Write your code here.
+            //this.OpenModalWindow("AddressSearch");
+        }
+
+        partial void AddressesAddAndEditNew_CanExecute(ref bool result)
+        {
+            // Write your code here.
+
+        }
+
+        partial void AddressesAddAndEditNew_Execute()
+        {
+            // Write your code here.
+            this.NewAddress = this.Addresses.AddNew();
+            this.OpenModalWindow("CreateNewAddress");
+        }
 
         partial void SaveAddress_Execute()
         {
             // Write your code here.
-            this.CloseModalWindow("EditAddress");
+            this.CloseModalWindow("CreateNewAddress");
         }
 
         partial void SelectAddress_Execute()
@@ -84,27 +107,6 @@ namespace LightSwitchApplication
             this.ContactEmailAddresses.Where(x => x.Primary).ToList().ForEach(x => x.Primary = false);
             this.ContactEmailAddresses.SelectedItem.Primary = true;
             SetContactEmailAddressProperties();
-        }
-
-        partial void ContactAddressesAddAndEditNew_Execute()
-        {
-            // Write your code here.
-            this.NewAddress = this.Addresses.AddNew();
-            this.OpenModalWindow("EditAddress");
-
-        }
-
-        partial void ContactAddressesEditSelected_Execute()
-        {
-            this.NewAddress = this.ContactAddresses.SelectedItem.Address;
-            this.OpenModalWindow("EditAddress");
-        }
-
-        partial void CancelSaveAddress_Execute()
-        {
-            // Write your code here.
-            this.ContactAddresses.Load();
-            this.CloseModalWindow("EditAddress");
         }
 
 
