@@ -67,10 +67,10 @@
         FromEnd="Country"
         ToEnd="StateProvince" />
       <NavigationProperty
-        Name="Addresses"
-        Association="Address_Country"
+        Name="ContactAddress"
+        Association="ContactAddress_Country"
         FromEnd="Country"
-        ToEnd="Address" />
+        ToEnd="ContactAddress" />
       <EntityProperty
         Name="CreatedBy"
         IsReadOnly="True"
@@ -225,11 +225,11 @@
         EntitySet="Countries" />
     </AssociationSet>
     <AssociationSet
-      Name="Address_Countries"
-      Association="Address_Country">
+      Name="ContactAddress_Countries"
+      Association="ContactAddress_Country">
       <AssociationSetEnd
-        Name="Address"
-        EntitySet="Addresses" />
+        Name="ContactAddress"
+        EntitySet="ContactAddresses" />
       <AssociationSetEnd
         Name="Country"
         EntitySet="Countries" />
@@ -278,19 +278,19 @@
       </AssociationSetMapping.Attributes>
     </AssociationSetMapping>
     <AssociationSetMapping
-      AssociationSet="Address_Countries">
+      AssociationSet="ContactAddress_Countries">
       <AssociationSetMapping.Attributes>
         <SsdlAssociationSet
           Name="Address_Countries" />
         <SsdlAssociationSetEnd
-          End="ApplicationData/Members[Address_Countries]/Members[Address]">
+          End="ApplicationData/Members[ContactAddress_Countries]/Members[ContactAddress]">
           <SsdlAssociationSetEnd.Attributes>
             <SsdlPropertyRef
               Name="Address_Country" />
           </SsdlAssociationSetEnd.Attributes>
         </SsdlAssociationSetEnd>
         <SsdlAssociationSetEnd
-          End="ApplicationData/Members[Address_Countries]/Members[Country]">
+          End="ApplicationData/Members[ContactAddress_Countries]/Members[Country]">
           <SsdlAssociationSetEnd.Attributes>
             <SsdlPropertyRef
               Name="Id" />
@@ -300,11 +300,11 @@
     </AssociationSetMapping>
   </DataService>
   <Association
-    Name="Address_Country">
+    Name="ContactAddress_Country">
     <AssociationEnd
-      Name="Address"
+      Name="ContactAddress"
       Multiplicity="Many"
-      EntityType="Address" />
+      EntityType="ContactAddress" />
     <AssociationEnd
       Name="Country"
       Multiplicity="One"

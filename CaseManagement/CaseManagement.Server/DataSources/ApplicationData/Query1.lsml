@@ -11,14 +11,14 @@
     </EntityContainer.Attributes>
     <QueryOperation
       Name="Query1"
-      ReturnType="Address*">
+      ReturnType="ContactAddress*">
       <QueryOperation.FilterExpression>
         <QueryFilterExpressionTree />
       </QueryOperation.FilterExpression>
       <QueryOperation.Source>
         <QuerySourceExpressionTree>
           <MemberExpression
-            Member="Addresses" />
+            Member="ContactAddresses" />
         </QuerySourceExpressionTree>
       </QueryOperation.Source>
     </QueryOperation>

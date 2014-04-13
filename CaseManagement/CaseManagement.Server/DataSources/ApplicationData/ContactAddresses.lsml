@@ -26,6 +26,52 @@
           <NotSearchable />
         </KeyProperty.Attributes>
       </KeyProperty>
+      <EntityProperty
+        Name="AddressLine1"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="255" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="AddressLine2"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="255" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="City"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="255" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="PostalCode"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="255" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <NavigationProperty
+        Name="Country"
+        Association="ContactAddress_Country"
+        FromEnd="ContactAddress"
+        ToEnd="Country" />
+      <NavigationProperty
+        Name="StateProvince"
+        Association="ContactAddress_StateProvince"
+        FromEnd="ContactAddress"
+        ToEnd="StateProvince" />
       <NavigationProperty
         Name="Contact"
         Association="ContactAddress_Contact"
@@ -39,11 +85,6 @@
           <NotSearchable />
         </EntityProperty.Attributes>
       </EntityProperty>
-      <NavigationProperty
-        Name="Address"
-        Association="ContactAddress_Address"
-        FromEnd="ContactAddress"
-        ToEnd="Address" />
       <EntityProperty
         Name="CreatedBy"
         IsReadOnly="True"
@@ -197,11 +238,15 @@
       EntitySet="ContactAddresses">
       <EntitySetMapping.Attributes>
         <SsdlForeignKeyProperty
-          Name="ContactAddress_Contact"
+          Name="Address_Country"
           Nullable="False"
           Type="int" />
         <SsdlForeignKeyProperty
-          Name="ContactAddress_Address"
+          Name="Address_StateProvince"
+          Nullable="True"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="ContactAddress_Contact"
           Nullable="False"
           Type="int" />
       </EntitySetMapping.Attributes>

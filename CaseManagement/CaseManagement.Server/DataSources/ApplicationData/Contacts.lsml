@@ -51,11 +51,6 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
-        Name="ContactAddresses"
-        Association="ContactAddress_Contact"
-        FromEnd="Contact"
-        ToEnd="ContactAddress" />
-      <NavigationProperty
         Name="ContactEmailAddresses"
         Association="ContactEmailAddress_Contact"
         FromEnd="Contact"
@@ -65,6 +60,11 @@
         Association="ContactPhoneNumber_Contact"
         FromEnd="Contact"
         ToEnd="ContactPhoneNumber" />
+      <NavigationProperty
+        Name="ContactAddresses"
+        Association="ContactAddress_Contact"
+        FromEnd="Contact"
+        ToEnd="ContactAddress" />
       <EntityProperty
         Name="CreatedBy"
         IsReadOnly="True"
@@ -209,16 +209,6 @@
       </QueryOperationParameter>
     </QueryOperation>
     <AssociationSet
-      Name="ContactAddress_Contacts"
-      Association="ContactAddress_Contact">
-      <AssociationSetEnd
-        Name="ContactAddress"
-        EntitySet="ContactAddresses" />
-      <AssociationSetEnd
-        Name="Contact"
-        EntitySet="Contacts" />
-    </AssociationSet>
-    <AssociationSet
       Name="ContactEmailAddress_Contacts"
       Association="ContactEmailAddress_Contact">
       <AssociationSetEnd
@@ -238,49 +228,22 @@
         Name="Contact"
         EntitySet="Contacts" />
     </AssociationSet>
+    <AssociationSet
+      Name="ContactAddress_Contacts"
+      Association="ContactAddress_Contact">
+      <AssociationSetEnd
+        Name="ContactAddress"
+        EntitySet="ContactAddresses" />
+      <AssociationSetEnd
+        Name="Contact"
+        EntitySet="Contacts" />
+    </AssociationSet>
   </EntityContainer>
-  <Association
-    Name="ContactAddress_Contact">
-    <AssociationEnd
-      Name="ContactAddress"
-      Multiplicity="Many"
-      EntityType="ContactAddress" />
-    <AssociationEnd
-      Name="Contact"
-      Multiplicity="One"
-      EntityType="Contact">
-      <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Restrict" />
-      </AssociationEnd.Attributes>
-    </AssociationEnd>
-  </Association>
   <DataService
     Name="ApplicationDataMapping">
     <DataService.Attributes>
       <Partial />
     </DataService.Attributes>
-    <AssociationSetMapping
-      AssociationSet="ContactAddress_Contacts">
-      <AssociationSetMapping.Attributes>
-        <SsdlAssociationSet
-          Name="ContactAddress_Contacts" />
-        <SsdlAssociationSetEnd
-          End="ApplicationData/Members[ContactAddress_Contacts]/Members[ContactAddress]">
-          <SsdlAssociationSetEnd.Attributes>
-            <SsdlPropertyRef
-              Name="ContactAddress_Contact" />
-          </SsdlAssociationSetEnd.Attributes>
-        </SsdlAssociationSetEnd>
-        <SsdlAssociationSetEnd
-          End="ApplicationData/Members[ContactAddress_Contacts]/Members[Contact]">
-          <SsdlAssociationSetEnd.Attributes>
-            <SsdlPropertyRef
-              Name="Id" />
-          </SsdlAssociationSetEnd.Attributes>
-        </SsdlAssociationSetEnd>
-      </AssociationSetMapping.Attributes>
-    </AssociationSetMapping>
     <AssociationSetMapping
       AssociationSet="ContactEmailAddress_Contacts">
       <AssociationSetMapping.Attributes>
@@ -323,6 +286,27 @@
         </SsdlAssociationSetEnd>
       </AssociationSetMapping.Attributes>
     </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="ContactAddress_Contacts">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="ContactAddress_Contacts" />
+        <SsdlAssociationSetEnd
+          End="ApplicationData/Members[ContactAddress_Contacts]/Members[ContactAddress]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ContactAddress_Contact" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="ApplicationData/Members[ContactAddress_Contacts]/Members[Contact]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
   </DataService>
   <Association
     Name="ContactEmailAddress_Contact">
@@ -353,6 +337,22 @@
       <AssociationEnd.Attributes>
         <DeleteRule
           Action="Restrict" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+  </Association>
+  <Association
+    Name="ContactAddress_Contact">
+    <AssociationEnd
+      Name="ContactAddress"
+      Multiplicity="Many"
+      EntityType="ContactAddress" />
+    <AssociationEnd
+      Name="Contact"
+      Multiplicity="One"
+      EntityType="Contact">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Cascade" />
       </AssociationEnd.Attributes>
     </AssociationEnd>
   </Association>

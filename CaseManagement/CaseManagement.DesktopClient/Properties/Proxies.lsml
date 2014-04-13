@@ -43,31 +43,19 @@
   <EntityType>
     <EntityType.Attributes>
       <Proxy
-        Target="ServiceInterface:Address" />
-    </EntityType.Attributes>
-  </EntityType>
-  <Association>
-    <Association.Attributes>
-      <Proxy
-        Target="ServiceInterface:Address_Country" />
-    </Association.Attributes>
-  </Association>
-  <Association>
-    <Association.Attributes>
-      <Proxy
-        Target="ServiceInterface:Address_StateProvince" />
-    </Association.Attributes>
-  </Association>
-  <EntityType>
-    <EntityType.Attributes>
-      <Proxy
         Target="ServiceInterface:ContactAddress" />
     </EntityType.Attributes>
   </EntityType>
   <Association>
     <Association.Attributes>
       <Proxy
-        Target="ServiceInterface:ContactAddress_Contact" />
+        Target="ServiceInterface:ContactAddress_Country" />
+    </Association.Attributes>
+  </Association>
+  <Association>
+    <Association.Attributes>
+      <Proxy
+        Target="ServiceInterface:ContactAddress_StateProvince" />
     </Association.Attributes>
   </Association>
   <EntityType>
@@ -97,7 +85,7 @@
   <Association>
     <Association.Attributes>
       <Proxy
-        Target="ServiceInterface:ContactAddress_Address" />
+        Target="ServiceInterface:ContactAddress_Contact" />
     </Association.Attributes>
   </Association>
 </Application>

@@ -50,10 +50,10 @@
         FromEnd="StateProvince"
         ToEnd="Country" />
       <NavigationProperty
-        Name="Addresses"
-        Association="Address_StateProvince"
+        Name="ContactAddress"
+        Association="ContactAddress_StateProvince"
         FromEnd="StateProvince"
-        ToEnd="Address" />
+        ToEnd="ContactAddress" />
       <EntityProperty
         Name="CreatedBy"
         IsReadOnly="True"
@@ -198,11 +198,11 @@
       </QueryOperationParameter>
     </QueryOperation>
     <AssociationSet
-      Name="Address_StateProvinces"
-      Association="Address_StateProvince">
+      Name="ContactAddress_StateProvinces"
+      Association="ContactAddress_StateProvince">
       <AssociationSetEnd
-        Name="Address"
-        EntitySet="Addresses" />
+        Name="ContactAddress"
+        EntitySet="ContactAddresses" />
       <AssociationSetEnd
         Name="StateProvince"
         EntitySet="StateProvinces" />
@@ -223,19 +223,19 @@
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
     <AssociationSetMapping
-      AssociationSet="Address_StateProvinces">
+      AssociationSet="ContactAddress_StateProvinces">
       <AssociationSetMapping.Attributes>
         <SsdlAssociationSet
           Name="Address_StateProvinces" />
         <SsdlAssociationSetEnd
-          End="ApplicationData/Members[Address_StateProvinces]/Members[Address]">
+          End="ApplicationData/Members[ContactAddress_StateProvinces]/Members[ContactAddress]">
           <SsdlAssociationSetEnd.Attributes>
             <SsdlPropertyRef
               Name="Address_StateProvince" />
           </SsdlAssociationSetEnd.Attributes>
         </SsdlAssociationSetEnd>
         <SsdlAssociationSetEnd
-          End="ApplicationData/Members[Address_StateProvinces]/Members[StateProvince]">
+          End="ApplicationData/Members[ContactAddress_StateProvinces]/Members[StateProvince]">
           <SsdlAssociationSetEnd.Attributes>
             <SsdlPropertyRef
               Name="Id" />
@@ -245,11 +245,11 @@
     </AssociationSetMapping>
   </DataService>
   <Association
-    Name="Address_StateProvince">
+    Name="ContactAddress_StateProvince">
     <AssociationEnd
-      Name="Address"
+      Name="ContactAddress"
       Multiplicity="Many"
-      EntityType="Address" />
+      EntityType="ContactAddress" />
     <AssociationEnd
       Name="StateProvince"
       EntityType="StateProvince">
