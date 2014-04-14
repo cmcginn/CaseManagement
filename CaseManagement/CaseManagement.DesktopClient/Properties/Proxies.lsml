@@ -58,12 +58,6 @@
         Target="ServiceInterface:ContactAddress_StateProvince" />
     </Association.Attributes>
   </Association>
-  <EntityType>
-    <EntityType.Attributes>
-      <Proxy
-        Target="ServiceInterface:ContactEmailAddress" />
-    </EntityType.Attributes>
-  </EntityType>
   <Association>
     <Association.Attributes>
       <Proxy
@@ -88,4 +82,10 @@
         Target="ServiceInterface:ContactAddress_Contact" />
     </Association.Attributes>
   </Association>
+  <EntityType>
+    <EntityType.Attributes>
+      <Proxy
+        Target="ServiceInterface:ContactEmailAddress" />
+    </EntityType.Attributes>
+  </EntityType>
 </Application>

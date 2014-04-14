@@ -7,6 +7,7 @@ using Microsoft.LightSwitch;
 using Microsoft.LightSwitch.Framework.Client;
 using Microsoft.LightSwitch.Presentation;
 using Microsoft.LightSwitch.Presentation.Extensions;
+using System.Collections.Specialized;
 
 namespace LightSwitchApplication
 {
@@ -14,10 +15,24 @@ namespace LightSwitchApplication
     {
         void SetContactPrimaryEmailAddress()
         {
+
             var primary = ScreenData.ContactEmailAddresses.FirstOrDefault(x => x.Primary);
-            if (primary != null)
-                this.PrimaryEmailAddress = primary;
-            ContactEmailAddresses.ToList().ForEach(x => { });
+            if (primary == null)
+            {
+                //primary.Primary = true;
+                //this.PrimaryContactEmailAddress = primary;
+                primary = ScreenData.ContactEmailAddresses.FirstOrDefault();
+                if(primary != null)
+                {
+                    primary.Primary = true;
+                    this.PrimaryContactEmailAddress = primary;
+                }
+            }
+            else
+            {
+                this.PrimaryContactEmailAddress = primary;
+            }
+
         }
         void SetContactAddressProperties()
         {
@@ -49,18 +64,8 @@ namespace LightSwitchApplication
         //    this.SetDisplayNameFromEntity(this.Contact);
         //}
 
-        partial void ContactAddressesAddAndEditNew_CanExecute(ref bool result)
-        {
-            // Write your code here.
 
-        }
 
-        partial void ContactAddressesAddAndEditNew_Execute()
-        {
-            // Write your code here.
-          //  this.ContactAddressEdit = this.ContactAddresses.AddNew();
-            this.OpenModalWindow("ContactAddressEditGroup");
-        }
 
         partial void SaveContactAddress_Execute()
         {
@@ -76,24 +81,7 @@ namespace LightSwitchApplication
             this.CloseModalWindow("ContactAddressEditGroup");
         }
 
-        partial void SetPrimaryContactAddress_Execute()
-        {
-            // Write your code here.
 
-        }
-
-        partial void ContactDetail_Created()
-        {
-            
-        }
-
-        partial void SetPrimaryEmailAddress_Execute()
-        {
-            // Write your code here.
-            this.ContactEmailAddresses.Where(x => x.Primary).ToList().ForEach(x => x.Primary = false);
-            this.ContactEmailAddresses.SelectedItem.Primary = true;
-            SetContactPrimaryEmailAddress();
-        }
 
         partial void Contact_Loaded(bool succeeded)
         {
@@ -104,5 +92,95 @@ namespace LightSwitchApplication
             SetContactAddressProperties();
             SetContactPrimaryEmailAddress();
         }
+
+        partial void ContactEmailAddressesAddAndEditNew_Execute()
+        {
+            // Write your code here.
+            this.ContactEmailAddressEdit = this.ContactEmailAddresses.AddNew();
+            this.OpenModalWindow("ContactEmailAdressEditModal");
+        }
+
+        partial void SaveContactEmailAddress_Execute()
+        {
+            // Write your code here.
+            if (this.ContactEmailAddressEdit.Primary)
+            {
+                this.ContactEmailAddresses.Where(x => x.Primary).ToList().ForEach(x => x.Primary = false);
+                this.ContactEmailAddressEdit.Primary = true;
+                SetContactPrimaryEmailAddress();
+            }
+            this.CloseModalWindow("ContactEmailAdressEditModal");
+        }
+
+        partial void CancelContactEmailAddressEdit_Execute()
+        {
+            // Write your code here.
+            //this.ContactE
+            this.ContactEmailAddressEdit.Details.DiscardChanges();
+            this.CloseModalWindow("ContactEmailAdressEditModal");
+        }
+
+        partial void ContactEmailAddressesDeleteSelected_Execute()
+        {
+            // Write your code here.
+
+            this.ContactEmailAddresses.SelectedItem.Delete();
+            this.ContactEmailAddresses.Screen.Save();
+            SetContactPrimaryEmailAddress();
+        }
+
+        partial void PrimaryContactEmailAddress_Changed()
+        {
+
+            var selected = this.PrimaryContactEmailAddress;
+            var primary = this.ContactEmailAddresses.FirstOrDefault(x => x.Primary);
+            if (selected != primary)
+            {
+                this.ContactEmailAddresses.Except(new List<ContactEmailAddress> { selected }).Where(x => x.Primary).ToList().ForEach(x => x.Primary = false);
+                this.PrimaryContactEmailAddress.Primary = true;
+            }
+
+           
+        }
+
+        partial void ContactDetail_Saving(ref bool handled)
+        {
+            // Write your code here.
+            if(this.ContactEmailAddresses.Any(x=>x.Primary) == false && this.ContactEmailAddresses.Any())       
+                this.ContactEmailAddresses.OrderByDescending(x => x.Modified).First().Primary = true;
+
+            //this.Refresh();
+           
+ 
+        }
+
+        partial void ContactDetail_Saved()
+        {
+            // Write your code here.
+            Application.RaiseContactSavedEvent();
+            this.Close(false);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

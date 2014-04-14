@@ -71,20 +71,47 @@
               </ContentItem.DataSource>
             </ContentItem>
             <ContentItem
-              Name="PrimaryEmailAddress_EmailAddress"
-              Kind="Value"
-              DataType="Microsoft.LightSwitch.Extensions:EmailAddress"
-              View="Microsoft.LightSwitch.RichClient:Label">
+              Name="PrimaryContactEmailAddress"
+              Kind="Details"
+              DataType="ContactEmailAddress">
+              <ContentItem.ChoicesSource>
+                <ScreenExpressionTree>
+                  <ChainExpression>
+                    <MemberExpression
+                      Member="ContactDetail/Properties[ContactEmailAddresses]" />
+                  </ChainExpression>
+                </ScreenExpressionTree>
+              </ContentItem.ChoicesSource>
               <ContentItem.DataSource>
                 <ScreenExpressionTree>
                   <ChainExpression>
                     <MemberExpression
-                      Member="ContactDetail/Properties[PrimaryEmailAddress]" />
-                    <MemberExpression
-                      Member="EmailAddress" />
+                      Member="ContactDetail/Properties[PrimaryContactEmailAddress]" />
                   </ChainExpression>
                 </ScreenExpressionTree>
               </ContentItem.DataSource>
+              <ContentItem
+                Name="ContactEmailAddress"
+                Kind="Details"
+                DataType="ContactEmailAddress">
+                <ContentItem.DataSource>
+                  <ScreenExpressionTree>
+                    <ChainExpression />
+                  </ScreenExpressionTree>
+                </ContentItem.DataSource>
+              </ContentItem>
+              <ContentItem.PropertySources>
+                <ControlPropertySource
+                  Property="Microsoft.LightSwitch.RichClient:DetailsAutoCompleteBox/Properties[AutoCompleteBoxFilterMode]">
+                  <ScreenExpressionTree>
+                    <ChainExpression>
+                      <ConstantExpression
+                        Value="Equals"
+                        ResultType=":String" />
+                    </ChainExpression>
+                  </ScreenExpressionTree>
+                </ControlPropertySource>
+              </ContentItem.PropertySources>
             </ContentItem>
             <ContentItem
               Name="PrimaryPhoneNumber_PhoneNumber"
@@ -282,193 +309,6 @@
               Name="ContactInfoGroup"
               Kind="Group"
               View="Microsoft.LightSwitch.RichClient:TabsLayout">
-              <ContentItem
-                Name="ContactEmailAddresses1"
-                Kind="Collection"
-                DataType="CollectionView$ContactEmailAddress">
-                <ContentItem.DataSource>
-                  <ScreenExpressionTree>
-                    <ChainExpression>
-                      <MemberExpression
-                        Member="ContactDetail/Properties[ContactEmailAddresses]" />
-                    </ChainExpression>
-                  </ScreenExpressionTree>
-                </ContentItem.DataSource>
-                <ContentItem
-                  Name="ContactEmailAddresses1Template"
-                  Kind="Details"
-                  DataType="ContactEmailAddress">
-                  <ContentItem.DataSource>
-                    <ScreenExpressionTree>
-                      <ChainExpression />
-                    </ScreenExpressionTree>
-                  </ContentItem.DataSource>
-                  <ContentItem
-                    Name="EmailAddress1"
-                    Kind="Value"
-                    DataType="Microsoft.LightSwitch.Extensions:EmailAddress">
-                    <ContentItem.DataSource>
-                      <ScreenExpressionTree>
-                        <ChainExpression>
-                          <MemberExpression
-                            Member="ContactEmailAddress/Properties[EmailAddress]" />
-                        </ChainExpression>
-                      </ScreenExpressionTree>
-                    </ContentItem.DataSource>
-                  </ContentItem>
-                  <ContentItem
-                    Name="Primary2"
-                    Kind="Value"
-                    DataType=":Boolean">
-                    <ContentItem.DataSource>
-                      <ScreenExpressionTree>
-                        <ChainExpression>
-                          <MemberExpression
-                            Member="ContactEmailAddress/Properties[Primary]" />
-                        </ChainExpression>
-                      </ScreenExpressionTree>
-                    </ContentItem.DataSource>
-                  </ContentItem>
-                  <ContentItem
-                    Name="Contact4"
-                    Kind="Details"
-                    DataType="Contact">
-                    <ContentItem.DataSource>
-                      <ScreenExpressionTree>
-                        <ChainExpression>
-                          <MemberExpression
-                            Member="ContactEmailAddress/Properties[Contact]" />
-                        </ChainExpression>
-                      </ScreenExpressionTree>
-                    </ContentItem.DataSource>
-                    <ContentItem
-                      Name="Contact5"
-                      Kind="Details"
-                      DataType="Contact">
-                      <ContentItem.DataSource>
-                        <ScreenExpressionTree>
-                          <ChainExpression />
-                        </ScreenExpressionTree>
-                      </ContentItem.DataSource>
-                    </ContentItem>
-                  </ContentItem>
-                  <ContentItem
-                    Name="CreatedBy3"
-                    Kind="Value"
-                    DataType=":Person?">
-                    <ContentItem.DataSource>
-                      <ScreenExpressionTree>
-                        <ChainExpression>
-                          <MemberExpression
-                            Member="ContactEmailAddress/Properties[CreatedBy]" />
-                        </ChainExpression>
-                      </ScreenExpressionTree>
-                    </ContentItem.DataSource>
-                  </ContentItem>
-                  <ContentItem
-                    Name="Created3"
-                    Kind="Value"
-                    DataType=":DateTimeOffset?">
-                    <ContentItem.DataSource>
-                      <ScreenExpressionTree>
-                        <ChainExpression>
-                          <MemberExpression
-                            Member="ContactEmailAddress/Properties[Created]" />
-                        </ChainExpression>
-                      </ScreenExpressionTree>
-                    </ContentItem.DataSource>
-                  </ContentItem>
-                  <ContentItem
-                    Name="ModifiedBy3"
-                    Kind="Value"
-                    DataType=":Person?">
-                    <ContentItem.DataSource>
-                      <ScreenExpressionTree>
-                        <ChainExpression>
-                          <MemberExpression
-                            Member="ContactEmailAddress/Properties[ModifiedBy]" />
-                        </ChainExpression>
-                      </ScreenExpressionTree>
-                    </ContentItem.DataSource>
-                  </ContentItem>
-                  <ContentItem
-                    Name="Modified3"
-                    Kind="Value"
-                    DataType=":DateTimeOffset?">
-                    <ContentItem.DataSource>
-                      <ScreenExpressionTree>
-                        <ChainExpression>
-                          <MemberExpression
-                            Member="ContactEmailAddress/Properties[Modified]" />
-                        </ChainExpression>
-                      </ScreenExpressionTree>
-                    </ContentItem.DataSource>
-                  </ContentItem>
-                  <ContentItem.CommandItems>
-                    <ContentItem
-                      Name="SetPrimaryEmailAddress"
-                      Kind="Command"
-                      View="Microsoft.LightSwitch.RichClient:Link">
-                      <ContentItem.Attributes>
-                        <DisplayName
-                          Value="Set Primary" />
-                      </ContentItem.Attributes>
-                      <ContentItem.DataSource>
-                        <ScreenExpressionTree>
-                          <ChainExpression>
-                            <CallExpression
-                              Target="ContactDetail/Methods[SetPrimaryEmailAddress]" />
-                          </ChainExpression>
-                        </ScreenExpressionTree>
-                      </ContentItem.DataSource>
-                    </ContentItem>
-                  </ContentItem.CommandItems>
-                </ContentItem>
-                <ContentItem.CommandItems>
-                  <ContentItem
-                    Name="ContactEmailAddresses_AddAndEditNew1"
-                    Kind="Command">
-                    <ContentItem.DataSource>
-                      <ScreenExpressionTree>
-                        <ChainExpression>
-                          <MemberExpression
-                            Member="ContactDetail/Properties[ContactEmailAddresses]" />
-                          <CallExpression
-                            Target="AddAndEditNew" />
-                        </ChainExpression>
-                      </ScreenExpressionTree>
-                    </ContentItem.DataSource>
-                  </ContentItem>
-                  <ContentItem
-                    Name="ContactEmailAddresses_EditSelected1"
-                    Kind="Command">
-                    <ContentItem.DataSource>
-                      <ScreenExpressionTree>
-                        <ChainExpression>
-                          <MemberExpression
-                            Member="ContactDetail/Properties[ContactEmailAddresses]" />
-                          <CallExpression
-                            Target="EditSelected" />
-                        </ChainExpression>
-                      </ScreenExpressionTree>
-                    </ContentItem.DataSource>
-                  </ContentItem>
-                  <ContentItem
-                    Name="ContactEmailAddresses_DeleteSelected1"
-                    Kind="Command">
-                    <ContentItem.DataSource>
-                      <ScreenExpressionTree>
-                        <ChainExpression>
-                          <MemberExpression
-                            Member="ContactDetail/Properties[ContactEmailAddresses]" />
-                          <CallExpression
-                            Target="DeleteSelected" />
-                        </ChainExpression>
-                      </ScreenExpressionTree>
-                    </ContentItem.DataSource>
-                  </ContentItem>
-                </ContentItem.CommandItems>
-              </ContentItem>
               <ContentItem
                 Name="ContactPhoneNumbers"
                 Kind="Collection"
@@ -847,20 +687,6 @@
                 </ContentItem>
                 <ContentItem.CommandItems>
                   <ContentItem
-                    Name="ContactAddresses_AddAndEditNew"
-                    Kind="Command">
-                    <ContentItem.DataSource>
-                      <ScreenExpressionTree>
-                        <ChainExpression>
-                          <MemberExpression
-                            Member="ContactDetail/Properties[ContactAddresses]" />
-                          <CallExpression
-                            Target="AddAndEditNew" />
-                        </ChainExpression>
-                      </ScreenExpressionTree>
-                    </ContentItem.DataSource>
-                  </ContentItem>
-                  <ContentItem
                     Name="ContactAddresses_EditSelected"
                     Kind="Command">
                     <ContentItem.DataSource>
@@ -890,10 +716,176 @@
                   </ContentItem>
                 </ContentItem.CommandItems>
               </ContentItem>
+              <ContentItem
+                Name="ContactEmailAddressGroup"
+                Kind="Group">
+                <ContentItem
+                  Name="ContactEmailAddresses1"
+                  Kind="Collection"
+                  DataType="CollectionView$ContactEmailAddress">
+                  <ContentItem.DataSource>
+                    <ScreenExpressionTree>
+                      <ChainExpression>
+                        <MemberExpression
+                          Member="ContactDetail/Properties[ContactEmailAddresses]" />
+                      </ChainExpression>
+                    </ScreenExpressionTree>
+                  </ContentItem.DataSource>
+                  <ContentItem
+                    Name="ContactEmailAddresses1Template"
+                    Kind="Details"
+                    DataType="ContactEmailAddress">
+                    <ContentItem.DataSource>
+                      <ScreenExpressionTree>
+                        <ChainExpression />
+                      </ScreenExpressionTree>
+                    </ContentItem.DataSource>
+                    <ContentItem
+                      Name="EmailAddress1"
+                      Kind="Value"
+                      DataType="Microsoft.LightSwitch.Extensions:EmailAddress">
+                      <ContentItem.DataSource>
+                        <ScreenExpressionTree>
+                          <ChainExpression>
+                            <MemberExpression
+                              Member="ContactEmailAddress/Properties[EmailAddress]" />
+                          </ChainExpression>
+                        </ScreenExpressionTree>
+                      </ContentItem.DataSource>
+                    </ContentItem>
+                    <ContentItem
+                      Name="Contact4"
+                      IsHidden="True"
+                      Kind="Details"
+                      DataType="Contact">
+                      <ContentItem.DataSource>
+                        <ScreenExpressionTree>
+                          <ChainExpression>
+                            <MemberExpression
+                              Member="ContactEmailAddress/Properties[Contact]" />
+                          </ChainExpression>
+                        </ScreenExpressionTree>
+                      </ContentItem.DataSource>
+                      <ContentItem
+                        Name="Contact5"
+                        Kind="Details"
+                        DataType="Contact">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression />
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                      </ContentItem>
+                    </ContentItem>
+                    <ContentItem
+                      Name="CreatedBy3"
+                      IsHidden="True"
+                      Kind="Value"
+                      DataType=":Person?">
+                      <ContentItem.DataSource>
+                        <ScreenExpressionTree>
+                          <ChainExpression>
+                            <MemberExpression
+                              Member="ContactEmailAddress/Properties[CreatedBy]" />
+                          </ChainExpression>
+                        </ScreenExpressionTree>
+                      </ContentItem.DataSource>
+                    </ContentItem>
+                    <ContentItem
+                      Name="Created3"
+                      IsHidden="True"
+                      Kind="Value"
+                      DataType=":DateTimeOffset?">
+                      <ContentItem.DataSource>
+                        <ScreenExpressionTree>
+                          <ChainExpression>
+                            <MemberExpression
+                              Member="ContactEmailAddress/Properties[Created]" />
+                          </ChainExpression>
+                        </ScreenExpressionTree>
+                      </ContentItem.DataSource>
+                    </ContentItem>
+                    <ContentItem
+                      Name="ModifiedBy3"
+                      IsHidden="True"
+                      Kind="Value"
+                      DataType=":Person?">
+                      <ContentItem.DataSource>
+                        <ScreenExpressionTree>
+                          <ChainExpression>
+                            <MemberExpression
+                              Member="ContactEmailAddress/Properties[ModifiedBy]" />
+                          </ChainExpression>
+                        </ScreenExpressionTree>
+                      </ContentItem.DataSource>
+                    </ContentItem>
+                    <ContentItem
+                      Name="Modified3"
+                      IsHidden="True"
+                      Kind="Value"
+                      DataType=":DateTimeOffset?">
+                      <ContentItem.DataSource>
+                        <ScreenExpressionTree>
+                          <ChainExpression>
+                            <MemberExpression
+                              Member="ContactEmailAddress/Properties[Modified]" />
+                          </ChainExpression>
+                        </ScreenExpressionTree>
+                      </ContentItem.DataSource>
+                    </ContentItem>
+                  </ContentItem>
+                  <ContentItem.CommandItems>
+                    <ContentItem
+                      Name="ContactEmailAddressesAddAndEditNew"
+                      Kind="Command">
+                      <ContentItem.Attributes>
+                        <DisplayName
+                          Value="Add..." />
+                      </ContentItem.Attributes>
+                      <ContentItem.DataSource>
+                        <ScreenExpressionTree>
+                          <ChainExpression>
+                            <CallExpression
+                              Target="ContactDetail/Methods[ContactEmailAddressesAddAndEditNew]" />
+                          </ChainExpression>
+                        </ScreenExpressionTree>
+                      </ContentItem.DataSource>
+                    </ContentItem>
+                    <ContentItem
+                      Name="ContactEmailAddresses_EditSelected"
+                      Kind="Command">
+                      <ContentItem.DataSource>
+                        <ScreenExpressionTree>
+                          <ChainExpression>
+                            <MemberExpression
+                              Member="ContactDetail/Properties[ContactEmailAddresses]" />
+                            <CallExpression
+                              Target="EditSelected" />
+                          </ChainExpression>
+                        </ScreenExpressionTree>
+                      </ContentItem.DataSource>
+                    </ContentItem>
+                    <ContentItem
+                      Name="ContactEmailAddresses_DeleteSelected"
+                      Kind="Command">
+                      <ContentItem.DataSource>
+                        <ScreenExpressionTree>
+                          <ChainExpression>
+                            <MemberExpression
+                              Member="ContactDetail/Properties[ContactEmailAddresses]" />
+                            <CallExpression
+                              Target="DeleteSelected" />
+                          </ChainExpression>
+                        </ScreenExpressionTree>
+                      </ContentItem.DataSource>
+                    </ContentItem>
+                  </ContentItem.CommandItems>
+                </ContentItem>
+              </ContentItem>
             </ContentItem>
           </ContentItem>
           <ContentItem
-            Name="ContactAddressEditGroup"
+            Name="ContactAddressEditModal"
             Kind="Group"
             View="Microsoft.LightSwitch.RichClient:ModalWindow">
             <ContentItem
@@ -1171,6 +1163,112 @@
               </ControlPropertySource>
             </ContentItem.PropertySources>
           </ContentItem>
+          <ContentItem
+            Name="ContactEmailAdressEditModal"
+            Kind="Details"
+            DataType="ContactEmailAddress"
+            View="Microsoft.LightSwitch.RichClient:ModalWindow">
+            <ContentItem.Attributes>
+              <DisplayName
+                Value="Contact Email Adress" />
+            </ContentItem.Attributes>
+            <ContentItem.DataSource>
+              <ScreenExpressionTree>
+                <ChainExpression>
+                  <MemberExpression
+                    Member="ContactDetail/Properties[ContactEmailAddressEdit]" />
+                </ChainExpression>
+              </ScreenExpressionTree>
+            </ContentItem.DataSource>
+            <ContentItem
+              Name="ContactEmailAddressEditGroup"
+              Kind="Group">
+              <ContentItem
+                Name="EmailAddress"
+                Kind="Value"
+                DataType="Microsoft.LightSwitch.Extensions:EmailAddress">
+                <ContentItem.DataSource>
+                  <ScreenExpressionTree>
+                    <ChainExpression>
+                      <MemberExpression
+                        Member="ContactEmailAddress/Properties[EmailAddress]" />
+                    </ChainExpression>
+                  </ScreenExpressionTree>
+                </ContentItem.DataSource>
+              </ContentItem>
+              <ContentItem
+                Name="Primary1"
+                Kind="Value"
+                DataType=":Boolean">
+                <ContentItem.DataSource>
+                  <ScreenExpressionTree>
+                    <ChainExpression>
+                      <MemberExpression
+                        Member="ContactEmailAddress/Properties[Primary]" />
+                    </ChainExpression>
+                  </ScreenExpressionTree>
+                </ContentItem.DataSource>
+              </ContentItem>
+              <ContentItem.PropertySources>
+                <ControlPropertySource
+                  Property="Microsoft.LightSwitch.RichClient:RootControl/Properties[MinWidth]">
+                  <ScreenExpressionTree>
+                    <ChainExpression>
+                      <ConstantExpression
+                        Value="400"
+                        ResultType=":Double" />
+                    </ChainExpression>
+                  </ScreenExpressionTree>
+                </ControlPropertySource>
+              </ContentItem.PropertySources>
+            </ContentItem>
+            <ContentItem.CommandItems>
+              <ContentItem
+                Name="SaveContactEmailAddress"
+                Kind="Command">
+                <ContentItem.Attributes>
+                  <DisplayName
+                    Value="Save" />
+                </ContentItem.Attributes>
+                <ContentItem.DataSource>
+                  <ScreenExpressionTree>
+                    <ChainExpression>
+                      <CallExpression
+                        Target="ContactDetail/Methods[SaveContactEmailAddress]" />
+                    </ChainExpression>
+                  </ScreenExpressionTree>
+                </ContentItem.DataSource>
+              </ContentItem>
+              <ContentItem
+                Name="CancelContactEmailAddressEdit"
+                Kind="Command">
+                <ContentItem.Attributes>
+                  <DisplayName
+                    Value="Cancel" />
+                </ContentItem.Attributes>
+                <ContentItem.DataSource>
+                  <ScreenExpressionTree>
+                    <ChainExpression>
+                      <CallExpression
+                        Target="ContactDetail/Methods[CancelContactEmailAddressEdit]" />
+                    </ChainExpression>
+                  </ScreenExpressionTree>
+                </ContentItem.DataSource>
+              </ContentItem>
+            </ContentItem.CommandItems>
+            <ContentItem.PropertySources>
+              <ControlPropertySource
+                Property="Microsoft.LightSwitch.RichClient:RootControl/Properties[MinWidth]">
+                <ScreenExpressionTree>
+                  <ChainExpression>
+                    <ConstantExpression
+                      Value="400"
+                      ResultType=":Double" />
+                  </ChainExpression>
+                </ScreenExpressionTree>
+              </ControlPropertySource>
+            </ContentItem.PropertySources>
+          </ContentItem>
           <ContentItem.PropertySources>
             <ControlPropertySource
               Property="Microsoft.LightSwitch.RichClient:ScrollableControl/Properties[IsVerticalScrollBarEnabled]">
@@ -1242,13 +1340,6 @@
         </ScreenMethod.Attributes>
       </ScreenMethod>
       <ScreenMethod
-        Name="ContactAddressesAddAndEditNew">
-        <ScreenMethod.Attributes>
-          <BuiltInMethodOverride
-            MethodName="AddAndEditNew" />
-        </ScreenMethod.Attributes>
-      </ScreenMethod>
-      <ScreenMethod
         Name="SaveContactAddress" />
       <ScreenMethod
         Name="CancelContactAddressEdit" />
@@ -1256,6 +1347,31 @@
         Name="SetPrimaryContactAddress" />
       <ScreenMethod
         Name="SetPrimaryEmailAddress" />
+      <ScreenMethod
+        Name="ContactEmailAddressesAddAndEditNew">
+        <ScreenMethod.Attributes>
+          <BuiltInMethodOverride
+            MethodName="AddAndEditNew" />
+        </ScreenMethod.Attributes>
+      </ScreenMethod>
+      <ScreenMethod
+        Name="SaveContactEmailAddress" />
+      <ScreenMethod
+        Name="CancelContactEmailAddressEdit" />
+      <ScreenMethod
+        Name="ContactEmailAddressesDeleteSelected">
+        <ScreenMethod.Attributes>
+          <BuiltInMethodOverride
+            MethodName="DeleteSelected" />
+        </ScreenMethod.Attributes>
+      </ScreenMethod>
+      <ScreenMethod
+        Name="ContactEmailAddressesEditSelected">
+        <ScreenMethod.Attributes>
+          <BuiltInMethodOverride
+            MethodName="EditSelected" />
+        </ScreenMethod.Attributes>
+      </ScreenMethod>
     </Screen.Methods>
     <Screen.Properties>
       <ScreenProperty
@@ -1361,9 +1477,6 @@
         Name="PrimaryAddress"
         PropertyType="ContactAddress" />
       <ScreenProperty
-        Name="PrimaryEmailAddress"
-        PropertyType="ContactEmailAddress" />
-      <ScreenProperty
         Name="PrimaryPhoneNumber"
         PropertyType="ContactPhoneNumber" />
       <ScreenCollectionProperty
@@ -1426,6 +1539,17 @@
           </ChainExpression>
         </ScreenExpressionTree>
       </ScreenCollectionProperty>
+      <ScreenProperty
+        Name="ContactEmailAddressEdit"
+        PropertyType="ContactEmailAddress" />
+      <ScreenProperty
+        Name="PrimaryContactEmailAddress"
+        PropertyType="ContactEmailAddress">
+        <ScreenProperty.Attributes>
+          <DisplayName
+            Value="Primary Email Address" />
+        </ScreenProperty.Attributes>
+      </ScreenProperty>
     </Screen.Properties>
   </Screen>
   <Application.Methods>

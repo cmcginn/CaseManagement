@@ -22,5 +22,20 @@ namespace LightSwitchApplication
             // Write your code here.
             Application.ShowContactDetail(null);
         }
+
+        partial void SearchContacts_Created()
+        {
+            // Write your code here.
+            Application.ContactSaved -= Application_ContactSaved;
+            Application.ContactSaved += Application_ContactSaved;
+        }
+
+        void Application_ContactSaved()
+        {
+            this.Details.Dispatcher.BeginInvoke(() => {
+                this.Contacts.Refresh();
+            });
+
+        }
     }
 }
