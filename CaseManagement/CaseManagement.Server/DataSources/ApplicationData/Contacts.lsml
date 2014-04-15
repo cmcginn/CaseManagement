@@ -320,7 +320,7 @@
       EntityType="Contact">
       <AssociationEnd.Attributes>
         <DeleteRule
-          Action="Restrict" />
+          Action="Cascade" />
       </AssociationEnd.Attributes>
     </AssociationEnd>
   </Association>
@@ -336,7 +336,7 @@
       EntityType="Contact">
       <AssociationEnd.Attributes>
         <DeleteRule
-          Action="Restrict" />
+          Action="Cascade" />
       </AssociationEnd.Attributes>
     </AssociationEnd>
   </Association>

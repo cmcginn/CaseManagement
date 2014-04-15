@@ -261,8 +261,6 @@
     <LightSwitchModel Include="Properties\Proxies.lsml" />
     <LightSwitchModel Include="Screens\SearchCountries.lsml" />
     <LightSwitchModel Include="Screens\SearchStateProvinces.lsml" />
-    <LightSwitchModel Include="Screens\SearchCaseTypes.lsml" />
-    <LightSwitchModel Include="Screens\SearchStatusTypes.lsml" />
     <LightSwitchModel Include="Screens\SearchContacts.lsml" />
     <LightSwitchModel Include="Screens\ContactDetail.lsml" />
   </ItemGroup>
