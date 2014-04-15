@@ -191,8 +191,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataSources\ApplicationData\Contact.lsml.cs">
+      <DependentUpon>Contacts.lsml</DependentUpon>
+    </Compile>
+    <Compile Include="DataSources\ApplicationData\ContactAddress.lsml.cs">
+      <DependentUpon>ContactAddresses.lsml</DependentUpon>
+    </Compile>
     <Compile Include="DataSources\ApplicationData\ContactEmailAddress.lsml.cs">
       <DependentUpon>ContactEmailAddresses.lsml</DependentUpon>
+    </Compile>
+    <Compile Include="DataSources\ApplicationData\ContactPhoneNumber.lsml.cs">
+      <DependentUpon>ContactPhoneNumbers.lsml</DependentUpon>
     </Compile>
     <Compile Include="DataSources\ApplicationData\_ApplicationDataService.lsml.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

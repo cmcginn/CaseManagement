@@ -37,9 +37,8 @@
       </EntityProperty>
       <EntityProperty
         Name="AddressLine2"
-        PropertyType=":String">
+        PropertyType=":String?">
         <EntityProperty.Attributes>
-          <Required />
           <MaxLength
             Value="255" />
         </EntityProperty.Attributes>

@@ -229,8 +229,17 @@
     </ServiceMetadataReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CaseManagement.Server\DataSources\ApplicationData\Contact.lsml.cs">
+      <Link>UserCode\Shared\Contact.lsml.cs</Link>
+    </Compile>
+    <Compile Include="..\CaseManagement.Server\DataSources\ApplicationData\ContactAddress.lsml.cs">
+      <Link>UserCode\Shared\ContactAddress.lsml.cs</Link>
+    </Compile>
     <Compile Include="..\CaseManagement.Server\DataSources\ApplicationData\ContactEmailAddress.lsml.cs">
       <Link>UserCode\Shared\ContactEmailAddress.lsml.cs</Link>
+    </Compile>
+    <Compile Include="..\CaseManagement.Server\DataSources\ApplicationData\ContactPhoneNumber.lsml.cs">
+      <Link>UserCode\Shared\ContactPhoneNumber.lsml.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screens\ContactDetail.lsml.cs">

@@ -37,37 +37,39 @@ namespace LightSwitchApplication
 
         void SetContactPrimaryPhoneNumber()
         {
-
+            var primary = ScreenData.ContactPhoneNumbers.FirstOrDefault(x => x.Primary);
+            if(primary == null)
+            {
+                primary = ScreenData.ContactPhoneNumbers.FirstOrDefault();
+                if(primary != null)
+                {
+                    primary.Primary = true;
+                    this.PrimaryContactPhoneNumber = primary;
+                }
+            }
+            else
+            {
+                this.PrimaryContactPhoneNumber = primary;
+            }
         }
-        void SetContactAddressProperties()
+
+        void SetContactPrimaryAddress()
         {
-            //var primaryAddress = ContactAddresses.FirstOrDefault(x => x.Primary);
-            ////if (primaryAddress != null)
-            ////    this.PrimaryAddress = primaryAddress;
-            //ContactAddresses.ToList().ForEach(x =>
-            //{
-            //    this.FindControlInCollection("SetPrimaryContactAddress", x).IsVisible = x.Primary == false;
-
-            //});
+            var primary = ScreenData.ContactAddresses.FirstOrDefault(x => x.Primary);
+            if (primary == null)
+            {
+                primary = ScreenData.ContactAddresses.FirstOrDefault();
+                if (primary != null)
+                {
+                    primary.Primary = true;
+                    this.PrimaryContactAddress = primary;
+                }
+            }
+            else
+            {
+                this.PrimaryContactAddress = primary;
+            }
         }
-        //partial void Contact_Loaded(bool succeeded)
-        //{
-        //    // Write your code here.
-        //    this.SetDisplayNameFromEntity(this.Contact);
-        //    this.ScreenData = this.Contact ?? this.DataWorkspace.ApplicationData.Contacts.AddNew();
-        //}
-
-        //partial void Contact_Changed()
-        //{
-        //    // Write your code here.
-        //    this.SetDisplayNameFromEntity(this.Contact);
-        //}
-
-        //partial void ContactDetail_Saved()
-        //{
-        //    // Write your code here.
-        //    this.SetDisplayNameFromEntity(this.Contact);
-        //}
 
 
 
@@ -75,8 +77,14 @@ namespace LightSwitchApplication
         partial void SaveContactAddress_Execute()
         {
             // Write your code here.
-            this.CloseModalWindow("ContactAddressEditGroup");
-            SetContactAddressProperties();
+            if (this.ContactAddressEdit.Primary)
+            {
+                this.ContactAddresses.Where(x => x.Primary).ToList().ForEach(x => x.Primary = false);
+                this.ContactAddressEdit.Primary = true;
+                SetContactPrimaryAddress();
+            }
+            this.CloseModalWindow("ContactEmailAdressEditModal");
+
         }
 
         partial void CancelContactAddressEdit_Execute()
@@ -94,7 +102,8 @@ namespace LightSwitchApplication
             this.SetDisplayNameFromEntity(this.ScreenData);
 
 
-            SetContactAddressProperties();
+            SetContactPrimaryAddress();
+            SetContactPrimaryPhoneNumber();
             SetContactPrimaryEmailAddress();
         }
 
@@ -154,8 +163,11 @@ namespace LightSwitchApplication
             if(this.ContactEmailAddresses.Any(x=>x.Primary) == false && this.ContactEmailAddresses.Any())       
                 this.ContactEmailAddresses.OrderByDescending(x => x.Modified).First().Primary = true;
 
-            //this.Refresh();
-           
+            if (this.ContactPhoneNumbers.Any(x => x.Primary) == false && this.ContactPhoneNumbers.Any())
+                this.ContactPhoneNumbers.OrderByDescending(x => x.Modified).First().Primary = true;
+
+            if (this.ContactAddresses.Any(x => x.Primary) == false && this.ContactAddresses.Any())
+                this.ContactAddresses.OrderByDescending(x => x.Modified).First().Primary = true;          
  
         }
 
@@ -189,6 +201,36 @@ namespace LightSwitchApplication
             }
             this.CloseModalWindow("ContactPhoneNumberEditModal");
 
+        }
+
+        partial void PrimaryContactPhoneNumber_Changed()
+        {
+            var selected = this.PrimaryContactPhoneNumber;
+            var primary = this.ContactPhoneNumbers.FirstOrDefault(x => x.Primary);
+            if (selected != primary)
+            {
+                this.ContactPhoneNumbers.Except(new List<ContactPhoneNumber> { selected }).Where(x => x.Primary).ToList().ForEach(x => x.Primary = false);
+                this.PrimaryContactPhoneNumber.Primary = true;
+            }
+
+        }
+
+        partial void PrimaryContactAddress_Changed()
+        {
+            var selected = this.PrimaryContactAddress;
+            var primary = this.ContactAddresses.FirstOrDefault(x => x.Primary);
+            if (selected != primary)
+            {
+                this.ContactAddresses.Except(new List<ContactAddress> { selected }).Where(x => x.Primary).ToList().ForEach(x => x.Primary = false);
+                this.PrimaryContactAddress.Primary = true;
+            }
+        }
+
+        partial void CancelContactPhoneNumberEdit_Execute()
+        {
+            // Write your code here.
+            this.ContactPhoneNumberEdit.Details.DiscardChanges();
+            this.CloseModalWindow("ContactPhoneNumberEditModal");
         }
 
 
