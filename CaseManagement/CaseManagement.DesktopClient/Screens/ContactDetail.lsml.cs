@@ -34,6 +34,11 @@ namespace LightSwitchApplication
             }
 
         }
+
+        void SetContactPrimaryPhoneNumber()
+        {
+
+        }
         void SetContactAddressProperties()
         {
             //var primaryAddress = ContactAddresses.FirstOrDefault(x => x.Primary);
@@ -159,6 +164,31 @@ namespace LightSwitchApplication
             // Write your code here.
             Application.RaiseContactSavedEvent();
             this.Close(false);
+        }
+
+        partial void ContactPhoneNumbersAddAndEditNew_CanExecute(ref bool result)
+        {
+            // Write your code here.
+
+        }
+
+        partial void ContactPhoneNumbersAddAndEditNew_Execute()
+        {
+            // Write your code here.
+            this.ContactPhoneNumberEdit = this.ContactPhoneNumbers.AddNew();
+            this.OpenModalWindow("ContactPhoneNumberEditModal");
+        }
+        partial void SaveContactPhoneNumber_Execute()
+        {
+            // Write your code here.
+            if (this.ContactPhoneNumberEdit.Primary)
+            {
+                this.ContactPhoneNumbers.Where(x => x.Primary).ToList().ForEach(x => x.Primary = false);
+                this.ContactPhoneNumberEdit.Primary = true;
+                SetContactPrimaryPhoneNumber();
+            }
+            this.CloseModalWindow("ContactPhoneNumberEditModal");
+
         }
 
 
