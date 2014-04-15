@@ -498,15 +498,17 @@
                 </ContentItem>
                 <ContentItem.CommandItems>
                   <ContentItem
-                    Name="ContactAddresses_AddAndEditNew"
+                    Name="ContactAddressesAddAndEditNew"
                     Kind="Command">
+                    <ContentItem.Attributes>
+                      <DisplayName
+                        Value="Add..." />
+                    </ContentItem.Attributes>
                     <ContentItem.DataSource>
                       <ScreenExpressionTree>
                         <ChainExpression>
-                          <MemberExpression
-                            Member="ContactDetail/Properties[ContactAddresses]" />
                           <CallExpression
-                            Target="AddAndEditNew" />
+                            Target="ContactDetail/Methods[ContactAddressesAddAndEditNew]" />
                         </ChainExpression>
                       </ScreenExpressionTree>
                     </ContentItem.DataSource>
@@ -764,76 +766,6 @@
                   </ControlPropertySource>
                 </ContentItem.PropertySources>
               </ContentItem>
-              <ContentItem
-                Name="Primary4"
-                IsHidden="True"
-                Kind="Value"
-                DataType=":Boolean">
-                <ContentItem.DataSource>
-                  <ScreenExpressionTree>
-                    <ChainExpression>
-                      <MemberExpression
-                        Member="ContactAddress/Properties[Primary]" />
-                    </ChainExpression>
-                  </ScreenExpressionTree>
-                </ContentItem.DataSource>
-              </ContentItem>
-              <ContentItem
-                Name="CreatedBy7"
-                IsHidden="True"
-                Kind="Value"
-                DataType=":Person?">
-                <ContentItem.DataSource>
-                  <ScreenExpressionTree>
-                    <ChainExpression>
-                      <MemberExpression
-                        Member="ContactAddress/Properties[CreatedBy]" />
-                    </ChainExpression>
-                  </ScreenExpressionTree>
-                </ContentItem.DataSource>
-              </ContentItem>
-              <ContentItem
-                Name="Created7"
-                IsHidden="True"
-                Kind="Value"
-                DataType=":DateTimeOffset?">
-                <ContentItem.DataSource>
-                  <ScreenExpressionTree>
-                    <ChainExpression>
-                      <MemberExpression
-                        Member="ContactAddress/Properties[Created]" />
-                    </ChainExpression>
-                  </ScreenExpressionTree>
-                </ContentItem.DataSource>
-              </ContentItem>
-              <ContentItem
-                Name="ModifiedBy7"
-                IsHidden="True"
-                Kind="Value"
-                DataType=":Person?">
-                <ContentItem.DataSource>
-                  <ScreenExpressionTree>
-                    <ChainExpression>
-                      <MemberExpression
-                        Member="ContactAddress/Properties[ModifiedBy]" />
-                    </ChainExpression>
-                  </ScreenExpressionTree>
-                </ContentItem.DataSource>
-              </ContentItem>
-              <ContentItem
-                Name="Modified7"
-                IsHidden="True"
-                Kind="Value"
-                DataType=":DateTimeOffset?">
-                <ContentItem.DataSource>
-                  <ScreenExpressionTree>
-                    <ChainExpression>
-                      <MemberExpression
-                        Member="ContactAddress/Properties[Modified]" />
-                    </ChainExpression>
-                  </ScreenExpressionTree>
-                </ContentItem.DataSource>
-              </ContentItem>
               <ContentItem.CommandItems>
                 <ContentItem
                   Name="SaveContactAddressEdit"
@@ -933,20 +865,6 @@
                     <ChainExpression>
                       <MemberExpression
                         Member="ContactEmailAddress/Properties[EmailAddress]" />
-                    </ChainExpression>
-                  </ScreenExpressionTree>
-                </ContentItem.DataSource>
-              </ContentItem>
-              <ContentItem
-                Name="Primary1"
-                IsHidden="True"
-                Kind="Value"
-                DataType=":Boolean">
-                <ContentItem.DataSource>
-                  <ScreenExpressionTree>
-                    <ChainExpression>
-                      <MemberExpression
-                        Member="ContactEmailAddress/Properties[Primary]" />
                     </ChainExpression>
                   </ScreenExpressionTree>
                 </ContentItem.DataSource>
@@ -1221,6 +1139,13 @@
         Name="SaveContactPhoneNumber" />
       <ScreenMethod
         Name="CancelContactPhoneNumberEdit" />
+      <ScreenMethod
+        Name="ContactAddressesAddAndEditNew">
+        <ScreenMethod.Attributes>
+          <BuiltInMethodOverride
+            MethodName="AddAndEditNew" />
+        </ScreenMethod.Attributes>
+      </ScreenMethod>
     </Screen.Methods>
     <Screen.Properties>
       <ScreenProperty

@@ -199,15 +199,17 @@
                 </ContentItem.DataSource>
               </ContentItem>
               <ContentItem
-                Name="Contacts_EditSelected"
+                Name="gridEditSelected"
                 Kind="Command">
+                <ContentItem.Attributes>
+                  <DisplayName
+                    Value="Edit..." />
+                </ContentItem.Attributes>
                 <ContentItem.DataSource>
                   <ScreenExpressionTree>
                     <ChainExpression>
-                      <MemberExpression
-                        Member="SearchContacts/Properties[Contacts]" />
                       <CallExpression
-                        Target="EditSelected" />
+                        Target="SearchContacts/Methods[gridEditSelected]" />
                     </ChainExpression>
                   </ScreenExpressionTree>
                 </ContentItem.DataSource>
@@ -309,6 +311,13 @@
         <ScreenMethod.Attributes>
           <BuiltInMethodOverride
             MethodName="AddAndEditNew" />
+        </ScreenMethod.Attributes>
+      </ScreenMethod>
+      <ScreenMethod
+        Name="gridEditSelected">
+        <ScreenMethod.Attributes>
+          <BuiltInMethodOverride
+            MethodName="EditSelected" />
         </ScreenMethod.Attributes>
       </ScreenMethod>
     </Screen.Methods>

@@ -37,5 +37,11 @@ namespace LightSwitchApplication
             });
 
         }
+
+        partial void gridEditSelected_Execute()
+        {
+            // Write your code here.
+            Application.ShowContactDetail(this.Contacts.SelectedItem.Id);
+        }
     }
 }
